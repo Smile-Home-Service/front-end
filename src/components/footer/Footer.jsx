@@ -1,108 +1,136 @@
-import { Button } from "@/components/button/Button"
-
 export default function Footer() {
   return (
-    <footer className="bg-sidebar border-t border-sidebar-border">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          <div className="space-y-4">
-            <h3 className="text-2xl font-bold text-primary">ServiceHub</h3>
-            <p className="text-sidebar-foreground">
-              Connecting you with trusted home service professionals through our mobile platform.
+    <footer className="bg-gray-50 border-t border-gray-200">
+      <div className="max-w-7xl mx-auto px-6 py-12 lg:px-8">
+        {/* Top Section */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* Brand / About */}
+          <div>
+            <h2 className="text-xl font-semibold text-gray-800">HomeServe</h2>
+            <p className="mt-4 text-sm text-gray-600">
+              Making home services simple, reliable, and stress-free.
             </p>
-            <div className="flex space-x-4">
-              <Button variant="outline" size="sm">
-                Download iOS
-              </Button>
-              <Button variant="outline" size="sm">
-                Download Android
-              </Button>
+          </div>
+
+          {/* Navigation */}
+          <div className="flex flex-col sm:flex-row sm:justify-center gap-6">
+            <div>
+              <h3 className="text-sm font-semibold text-gray-700 tracking-wider uppercase">
+                Company
+              </h3>
+              <ul className="mt-4 space-y-2">
+                <li>
+                  <a href="#" className="text-gray-500 hover:text-gray-900">
+                    About
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-gray-500 hover:text-gray-900">
+                    Services
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-gray-500 hover:text-gray-900">
+                    How It Works
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-gray-500 hover:text-gray-900">
+                    Blog
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-sm font-semibold text-gray-700 tracking-wider uppercase">
+                Support
+              </h3>
+              <ul className="mt-4 space-y-2">
+                <li>
+                  <a href="#" className="text-gray-500 hover:text-gray-900">
+                    Contact
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-gray-500 hover:text-gray-900">
+                    Privacy
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-gray-500 hover:text-gray-900">
+                    Terms
+                  </a>
+                </li>
+              </ul>
             </div>
           </div>
 
-          <div className="space-y-4">
-            <h4 className="font-semibold text-sidebar-foreground">Services</h4>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>
-                <a href="#" className="hover:text-primary transition-colors">
-                  House Cleaning
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-primary transition-colors">
-                  Plumbing
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-primary transition-colors">
-                  Electrical
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-primary transition-colors">
-                  Gardening
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div className="space-y-4">
-            <h4 className="font-semibold text-sidebar-foreground">Company</h4>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>
-                <a href="#" className="hover:text-primary transition-colors">
-                  About Us
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-primary transition-colors">
-                  Careers
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-primary transition-colors">
-                  Press
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-primary transition-colors">
-                  Contact
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div className="space-y-4">
-            <h4 className="font-semibold text-sidebar-foreground">Support</h4>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>
-                <a href="#" className="hover:text-primary transition-colors">
-                  Help Center
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-primary transition-colors">
-                  Privacy Policy
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-primary transition-colors">
-                  Terms of Service
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-primary transition-colors">
-                  Safety
-                </a>
-              </li>
-            </ul>
+          {/* Newsletter / Social */}
+          <div>
+            <h3 className="text-sm font-semibold text-gray-700 tracking-wider uppercase">
+              Stay Connected
+            </h3>
+            <p className="mt-4 text-sm text-gray-600">
+              Subscribe for updates, offers, and tips.
+            </p>
+            <form className="mt-4 flex rounded-md shadow-sm">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                className="flex-1 px-3 py-2 border border-gray-300 rounded-l-md text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              />
+              <button
+                type="submit"
+                className="px-4 py-2 bg-indigo-600 text-white rounded-r-md text-sm hover:bg-indigo-700"
+              >
+                Subscribe
+              </button>
+            </form>
+            <div className="mt-6 flex space-x-4">
+              <a href="#" className="text-gray-400 hover:text-gray-600">
+                <span className="sr-only">Facebook</span>
+                <svg
+                  className="h-6 w-6"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M22 12c0-5.523-4.477-10..."></path>
+                </svg>
+              </a>
+              <a href="#" className="text-gray-400 hover:text-gray-600">
+                <span className="sr-only">Instagram</span>
+                <svg
+                  className="h-6 w-6"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M12.315 2c2.43 0..."></path>
+                </svg>
+              </a>
+              <a href="#" className="text-gray-400 hover:text-gray-600">
+                <span className="sr-only">Twitter</span>
+                <svg
+                  className="h-6 w-6"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M8.29 20.251c7.547..."></path>
+                </svg>
+              </a>
+            </div>
           </div>
         </div>
 
-        <div className="border-t border-sidebar-border mt-12 pt-8 text-center text-sm text-muted-foreground">
-          <p>&copy; 2024 ServiceHub. All rights reserved.</p>
+        {/* Bottom Section */}
+        <div className="mt-12 border-t border-gray-200 pt-6 flex flex-col sm:flex-row justify-between items-center">
+          <p className="text-sm text-gray-500">
+            &copy; 2025 HomeServe. All rights reserved.
+          </p>
+          <p className="text-sm text-gray-500 mt-4 sm:mt-0">
+            Built with ❤️ by HomeServe Team
+          </p>
         </div>
       </div>
     </footer>
-  )
+  );
 }
