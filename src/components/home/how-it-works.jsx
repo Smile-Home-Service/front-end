@@ -1,49 +1,72 @@
-export default function HowItWorks() {
-  const steps = [
-    {
-      step: "1",
-      title: "Choose Your Service",
-      description: "Browse our categories and select the service you need",
-    },
-    {
-      step: "2",
-      title: "Book Instantly",
-      description: "Pick your preferred time and book with just a few taps",
-    },
-    {
-      step: "3",
-      title: "Get Matched",
-      description: "We connect you with verified professionals in your area",
-    },
-    {
-      step: "4",
-      title: "Service Completed",
-      description: "Enjoy quality service and rate your experience",
-    },
-  ]
+import { motion } from "framer-motion";
 
+import { steps } from "@/utils/data/home.data";
+
+export default function HowItWorks() {
   return (
-    <section id="how-it-works" className="py-20 bg-muted">
+    <div className="py-12 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center space-y-4 mb-16">
-          <h2 className="text-3xl lg:text-5xl font-black text-foreground">How It Works</h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Getting help for your home has never been easier
-          </p>
+        <div className="text-center">
+          <motion.h2
+            className="text-base font-semibold text-indigo-600 tracking-wide uppercase"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            Process
+          </motion.h2>
+          <motion.p
+            className="mt-2 text-3xl font-extrabold text-gray-900 sm:text-4xl"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
+            How HomeServe Works
+          </motion.p>
+          <motion.p
+            className="mt-3 max-w-2xl mx-auto text-xl text-gray-500 sm:mt-4"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            Simple, convenient, and reliable service in just a few steps
+          </motion.p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {steps.map((item, index) => (
-            <div key={index} className="text-center space-y-4">
-              <div className="mx-auto w-16 h-16 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-2xl font-bold">
-                {item.step}
-              </div>
-              <h3 className="text-xl font-bold text-foreground">{item.title}</h3>
-              <p className="text-muted-foreground">{item.description}</p>
-            </div>
-          ))}
+        <div className="mt-12">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
+            {steps.map((step, index) => (
+              <motion.div
+                key={step.id}
+                className="bg-white overflow-hidden shadow rounded-lg p-6 text-center"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={{ y: -5 }}
+              >
+                <div className="flex justify-center">
+                  <div className="bg-indigo-100 rounded-full p-3 text-indigo-600">
+                    {step.icon}
+                  </div>
+                </div>
+                <div className="mt-4">
+                  <div className="text-lg font-semibold text-gray-900 flex items-center justify-center">
+                    <span className="bg-indigo-600 text-white rounded-full h-8 w-8 flex items-center justify-center mr-2">
+                      {step.id}
+                    </span>
+                    {step.title}
+                  </div>
+                  <p className="mt-2 text-gray-500">{step.description}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
-    </section>
-  )
+    </div>
+  );
 }

@@ -1,4 +1,5 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Poppins } from "next/font/google";
+import Head from "next/head";
 import "./globals.css";
 
 import Navbar from "@/components/navbar/Navbar";
@@ -27,6 +28,14 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <Head>
+          <title>HomeServe | Professional Home Services</title>
+          <meta
+            name="description"
+            content="Book trusted professionals for all your home service needs"
+          />
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
         <Navbar />
         {children}
         <Cta />
