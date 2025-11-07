@@ -6,6 +6,7 @@ import Navbar from "@/components/navbar/Navbar";
 import FloatingSupportButton from "@/components/button/FabButton";
 import Footer from "@/components/footer/Footer";
 import Cta from "@/components/cta/Cta";
+import ReduxProvider from "./ReduxProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,19 +29,22 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Head>
-          <title>HomeServe | Professional Home Services</title>
-          <meta
-            name="description"
-            content="Book trusted professionals for all your home service needs"
-          />
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
-        <Navbar />
-        {children}
-        <Cta />
-        <Footer />
-        <FloatingSupportButton />
+        {/* Wrap everything with ReduxProvider */}
+        <ReduxProvider>
+          <Head>
+            <title>HomeServe | Professional Home Services</title>
+            <meta
+              name="description"
+              content="Book trusted professionals for all your home service needs"
+            />
+            <link rel="icon" href="/favicon.ico" />
+          </Head>
+          <Navbar />
+          {children}
+          <Cta />
+          <Footer />
+          <FloatingSupportButton />
+        </ReduxProvider>
       </body>
     </html>
   );
