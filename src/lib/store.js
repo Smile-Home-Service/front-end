@@ -3,30 +3,27 @@ import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { combineReducers } from "redux";
 
-// Import your slices
-// import counterReducer from './slices/counterSlice'
-// import userReducer from './slices/userSlice'
-
-// Create a placeholder reducer if you don't have slices yet
-const placeholderReducer = (state = {}) => state;
+// Import APIs
+import { baseApi } from "./api/base.api";
+import authReducer from "./features/auth/auth.slice";
 
 const rootReducer = combineReducers({
-  // Add your reducers here
-  // counter: counterReducer,
-  // user: userReducer,
-  placeholder: placeholderReducer, // Remove this when you add actual reducers
+  // Add API reducers
+  [baseApi.reducerPath]: baseApi.reducer,
+  auth: authReducer,
 });
 
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: [], // Add reducer names you want to persist
+  whitelist: ["auth"], // Persist the auth slice
   version: 1,
-  debug: process.env.NODE_ENV !== "production", // Only debug in development
+  debug: process.env.NODE_ENV !== "production",
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
+// Export makeStore function instead of direct store
 export const makeStore = () => {
   return configureStore({
     reducer: persistedReducer,
@@ -35,9 +32,14 @@ export const makeStore = () => {
         serializableCheck: {
           ignoredActions: ["persist/PERSIST", "persist/REHYDRATE"],
         },
-      }),
+      }).concat(baseApi.middleware),
     devTools: process.env.NODE_ENV !== "production",
   });
 };
 
+// Export persistor function that accepts store
 export const persistor = (store) => persistStore(store);
+
+// For direct access if needed (optional)
+export const store = makeStore();
+export const directPersistor = persistStore(store);

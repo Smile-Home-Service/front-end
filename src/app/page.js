@@ -2,15 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import {
-  Clock,
-  Star,
-  MapPin,
-  ShieldCheck,
-  Award,
-  ChevronLeft,
-  ChevronRight,
-} from "lucide-react";
+import { Clock, Star, MapPin, ShieldCheck, Award } from "lucide-react";
 
 import {
   services,
