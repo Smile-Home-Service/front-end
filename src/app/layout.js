@@ -5,7 +5,6 @@ import "./globals.css";
 import Navbar from "@/components/navbar/Navbar";
 import FloatingSupportButton from "@/components/button/FabButton";
 import Footer from "@/components/footer/Footer";
-import Cta from "@/components/cta/Cta";
 import ReduxProvider from "./ReduxProvider";
 
 const geistSans = Geist({
@@ -41,7 +40,6 @@ export default function RootLayout({ children }) {
           </Head>
           <Navbar />
           {children}
-          <Cta />
           <Footer />
           <FloatingSupportButton />
         </ReduxProvider>

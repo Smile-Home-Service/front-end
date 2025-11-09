@@ -96,6 +96,7 @@ export const testimonials = [
     content:
       "HomeServe saved me so much time and stress! The cleaner was professional and my house has never looked better. Will definitely use again.",
     rating: 5,
+    service: "cleaning",
     image:
       "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
   },
@@ -106,6 +107,7 @@ export const testimonials = [
     content:
       "The electrician arrived on time, fixed my wiring issue quickly, and was very knowledgeable. The pricing was transparent with no hidden fees.",
     rating: 5,
+    service: "cleaning",
     image:
       "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
   },
@@ -113,6 +115,7 @@ export const testimonials = [
     id: 3,
     name: "Emma Rodriguez",
     role: "Business Owner",
+    service: "repair",
     content:
       "I use HomeServe for both my home and office cleaning needs. Consistent quality every time. Highly recommend their services!",
     rating: 4.5,

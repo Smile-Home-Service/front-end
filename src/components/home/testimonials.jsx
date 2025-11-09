@@ -1,134 +1,167 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Star, ChevronLeft, ChevronRight } from "lucide-react";
+import { motion } from "framer-motion";
+import { Star, Quote } from "lucide-react";
 
 import { testimonials } from "@/utils/data/home.data";
 
 export default function Testimonials() {
-  const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const [activeCategory, setActiveCategory] = useState("all");
 
-  const nextTestimonial = () => {
-    setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
-  };
+  const categories = [
+    { id: "all", name: "All Services" },
+    { id: "cleaning", name: "Cleaning" },
+    { id: "repair", name: "Repairs" },
+    { id: "beauty", name: "Beauty" },
+  ];
 
-  const prevTestimonial = () => {
-    setCurrentTestimonial(
-      (prev) => (prev - 1 + testimonials.length) % testimonials.length
-    );
-  };
+  const filteredTestimonials =
+    activeCategory === "all"
+      ? testimonials
+      : testimonials.filter((t) => t.service === activeCategory);
+
   return (
-    <div className="py-12 bg-indigo-50">
+    <div className="py-16 bg-gradient-to-br from-indigo-50 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
-          <motion.h2
-            className="text-base font-semibold text-indigo-600 tracking-wide uppercase"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            Testimonials
-          </motion.h2>
-          <motion.p
-            className="mt-2 text-3xl font-extrabold text-gray-900 sm:text-4xl"
-            initial={{ opacity: 0, y: 10 }}
+        {/* Header */}
+        <div className="text-center mb-12">
+          <motion.span
+            className="inline-block px-4 py-2 bg-indigo-100 text-indigo-700 rounded-full text-sm font-medium mb-4"
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
           >
-            What our customers say
+            Customer Stories
+          </motion.span>
+          <motion.h2
+            className="text-4xl font-bold text-gray-900 mb-4"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+          >
+            Loved by Homeowners
+          </motion.h2>
+          <motion.p
+            className="text-xl text-gray-600 max-w-2xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+          >
+            Discover why thousands of families trust HomeServe for their home
+            needs
           </motion.p>
         </div>
 
-        <div className="mt-12 relative">
-          <div className="max-w-4xl mx-auto">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={testimonials[currentTestimonial].id}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.5 }}
-                className="bg-white p-8 rounded-lg shadow-lg"
-              >
-                <div className="flex items-center">
-                  <img
-                    src={testimonials[currentTestimonial].image}
-                    alt={testimonials[currentTestimonial].name}
-                    className="h-16 w-16 rounded-full object-cover"
-                  />
-                  <div className="ml-4">
-                    <h3 className="text-lg font-medium text-gray-900">
-                      {testimonials[currentTestimonial].name}
-                    </h3>
-                    <p className="text-gray-500">
-                      {testimonials[currentTestimonial].role}
-                    </p>
-                    <div className="flex items-center mt-1">
-                      {[...Array(5)].map((_, i) => (
-                        <Star
-                          key={i}
-                          className={`h-5 w-5 ${
-                            i <
-                            Math.floor(testimonials[currentTestimonial].rating)
-                              ? "text-yellow-400 fill-current"
-                              : "text-gray-300"
-                          }`}
-                        />
-                      ))}
-                      {testimonials[currentTestimonial].rating % 1 !== 0 && (
-                        <div className="relative">
-                          <Star className="h-5 w-5 text-gray-300" />
-                          <div
-                            className="absolute top-0 left-0 overflow-hidden"
-                            style={{
-                              width: `${
-                                (testimonials[currentTestimonial].rating % 1) *
-                                100
-                              }%`,
-                            }}
-                          >
-                            <Star className="h-5 w-5 text-yellow-400 fill-current" />
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </div>
-                <p className="mt-4 text-gray-600 italic">
-                  "{testimonials[currentTestimonial].content}"
-                </p>
-              </motion.div>
-            </AnimatePresence>
-          </div>
-
-          <button
-            onClick={prevTestimonial}
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-4 bg-white rounded-full p-2 shadow-md"
-          >
-            <ChevronLeft className="h-5 w-5 text-indigo-600" />
-          </button>
-          <button
-            onClick={nextTestimonial}
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-4 bg-white rounded-full p-2 shadow-md"
-          >
-            <ChevronRight className="h-5 w-5 text-indigo-600" />
-          </button>
-
-          <div className="flex justify-center mt-6 space-x-2">
-            {testimonials.map((_, index) => (
+        {/* Category Filter */}
+        <div className="flex justify-center mb-12">
+          <div className="bg-white rounded-2xl p-2 shadow-lg border border-gray-100">
+            {categories.map((category) => (
               <button
-                key={index}
-                onClick={() => setCurrentTestimonial(index)}
-                className={`h-3 w-3 rounded-full ${
-                  currentTestimonial === index ? "bg-indigo-600" : "bg-gray-300"
+                key={category.id}
+                onClick={() => setActiveCategory(category.id)}
+                className={`px-6 py-3 rounded-xl font-medium transition-all ${
+                  activeCategory === category.id
+                    ? "bg-indigo-600 text-white shadow-md"
+                    : "text-gray-600 hover:text-indigo-600"
                 }`}
-              />
+              >
+                {category.name}
+              </button>
             ))}
           </div>
         </div>
+
+        {/* Testimonial Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {filteredTestimonials.map((testimonial, index) => (
+            <motion.div
+              key={testimonial.id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              whileHover={{ y: -5 }}
+              className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-all"
+            >
+              {/* Quote Icon */}
+              <div className="mb-6">
+                <div className="w-12 h-12 bg-indigo-100 rounded-2xl flex items-center justify-center">
+                  <Quote className="h-6 w-6 text-indigo-600" />
+                </div>
+              </div>
+
+              {/* Rating */}
+              <div className="flex items-center mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <Star
+                    key={i}
+                    className={`h-5 w-5 ${
+                      i < Math.floor(testimonial.rating)
+                        ? "text-yellow-400 fill-current"
+                        : "text-gray-300"
+                    }`}
+                  />
+                ))}
+                <span className="ml-2 text-sm font-medium text-gray-600">
+                  {testimonial.rating}
+                </span>
+              </div>
+
+              {/* Content */}
+              <p className="text-gray-700 text-lg leading-relaxed mb-6">
+                "{testimonial.content}"
+              </p>
+
+              {/* Author */}
+              <div className="flex items-center">
+                <img
+                  src={testimonial.image}
+                  alt={testimonial.name}
+                  className="w-12 h-12 rounded-full object-cover border-2 border-indigo-100"
+                />
+                <div className="ml-4">
+                  <h4 className="font-semibold text-gray-900">
+                    {testimonial.name}
+                  </h4>
+                  <p className="text-indigo-600 text-sm">
+                    {testimonial.service}
+                  </p>
+                  <p className="text-gray-500 text-sm">{testimonial.role}</p>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Stats */}
+        <motion.div
+          className="mt-16 bg-white rounded-2xl p-8 shadow-lg border border-gray-100"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div>
+              <div className="text-3xl font-bold text-indigo-600">10K+</div>
+              <div className="text-gray-600">Happy Customers</div>
+            </div>
+            <div>
+              <div className="text-3xl font-bold text-indigo-600">4.9/5</div>
+              <div className="text-gray-600">Average Rating</div>
+            </div>
+            <div>
+              <div className="text-3xl font-bold text-indigo-600">50+</div>
+              <div className="text-gray-600">Cities Served</div>
+            </div>
+            <div>
+              <div className="text-3xl font-bold text-indigo-600">24/7</div>
+              <div className="text-gray-600">Support</div>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </div>
   );

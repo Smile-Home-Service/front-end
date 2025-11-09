@@ -3,22 +3,16 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Clock, Star, MapPin, ShieldCheck, Award } from "lucide-react";
+import Image from "next/image";
 
-import {
-  services,
-  categories,
-  cities,
-  testimonials,
-} from "@/utils/data/home.data";
+import { services, categories, cities } from "@/utils/data/home.data";
 import HeroSection from "@/components/home/hero-section";
 import HowItWorks from "@/components/home/how-it-works";
 import Testimonials from "@/components/home/testimonials";
 
 export default function HomeServiceApp() {
   const [activeCategory, setActiveCategory] = useState("all");
-  const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [email, setEmail] = useState("");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,13 +20,6 @@ export default function HomeServiceApp() {
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
-    }, 5000);
-    return () => clearInterval(interval);
   }, []);
 
   const filteredServices =
@@ -75,7 +62,7 @@ export default function HomeServiceApp() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              From cleaning to repairs, beauty to moving - we've got you
+              From cleaning to repairs, beauty to moving - we have got you
               covered.
             </motion.p>
           </div>
@@ -117,7 +104,9 @@ export default function HomeServiceApp() {
                 whileHover={{ y: -5 }}
               >
                 <div className="flex-shrink-0 relative">
-                  <img
+                  <Image
+                    width={100}
+                    height={100}
                     className="h-48 w-full object-cover"
                     src={service.image}
                     alt={service.title}
@@ -216,120 +205,12 @@ export default function HomeServiceApp() {
             transition={{ duration: 0.5, delay: 0.3 }}
           >
             <p className="text-gray-600">
-              Don't see your city? We're expanding rapidly!
+              Do not see your city? We are expanding rapidly!
             </p>
             <button className="mt-2 text-indigo-600 font-medium hover:text-indigo-700">
               Request HomeServe in your area →
             </button>
           </motion.div>
-        </div>
-      </div>
-
-      {/* Features Section */}
-      <div className="py-12 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <motion.h2
-              className="text-base font-semibold text-indigo-600 tracking-wide uppercase"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-            >
-              Why Choose Us
-            </motion.h2>
-            <motion.p
-              className="mt-2 text-3xl font-extrabold text-gray-900 sm:text-4xl"
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-            >
-              The HomeServe Advantage
-            </motion.p>
-          </div>
-
-          <div className="mt-10">
-            <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-              <motion.div
-                className="bg-white overflow-hidden shadow rounded-lg p-6"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                whileHover={{ y: -5 }}
-              >
-                <div className="flex items-center">
-                  <div className="flex-shrink-0">
-                    <div className="bg-indigo-100 rounded-md p-3">
-                      <ShieldCheck className="h-6 w-6 text-indigo-600" />
-                    </div>
-                  </div>
-                  <div className="ml-4">
-                    <h3 className="text-lg font-medium text-gray-900">
-                      Verified Professionals
-                    </h3>
-                  </div>
-                </div>
-                <p className="mt-2 text-base text-gray-500">
-                  All our service providers are thoroughly vetted, background
-                  checked, and trained to deliver quality service.
-                </p>
-              </motion.div>
-
-              <motion.div
-                className="bg-white overflow-hidden shadow rounded-lg p-6"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                whileHover={{ y: -5 }}
-              >
-                <div className="flex items-center">
-                  <div className="flex-shrink-0">
-                    <div className="bg-indigo-100 rounded-md p-3">
-                      <Award className="h-6 w-6 text-indigo-600" />
-                    </div>
-                  </div>
-                  <div className="ml-4">
-                    <h3 className="text-lg font-medium text-gray-900">
-                      Quality Guaranteed
-                    </h3>
-                  </div>
-                </div>
-                <p className="mt-2 text-base text-gray-500">
-                  We stand behind our work. If you're not satisfied, we'll make
-                  it right. Your happiness is our priority.
-                </p>
-              </motion.div>
-
-              <motion.div
-                className="bg-white overflow-hidden shadow rounded-lg p-6"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-                whileHover={{ y: -5 }}
-              >
-                <div className="flex items-center">
-                  <div className="flex-shrink-0">
-                    <div className="bg-indigo-100 rounded-md p-3">
-                      <Clock className="h-6 w-6 text-indigo-600" />
-                    </div>
-                  </div>
-                  <div className="ml-4">
-                    <h3 className="text-lg font-medium text-gray-900">
-                      On Time Service
-                    </h3>
-                  </div>
-                </div>
-                <p className="mt-2 text-base text-gray-500">
-                  We value your time. Our professionals arrive on schedule and
-                  complete the job efficiently without compromising quality.
-                </p>
-              </motion.div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
