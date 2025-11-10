@@ -5,7 +5,7 @@ import "./globals.css";
 import Navbar from "@/components/navbar/Navbar";
 import FloatingSupportButton from "@/components/button/FabButton";
 import Footer from "@/components/footer/Footer";
-import ReduxProvider from "./ReduxProvider";
+import ReduxProvider from "../lib/providers/ReduxProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

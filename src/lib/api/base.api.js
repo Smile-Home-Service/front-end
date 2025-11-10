@@ -1,16 +1,15 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://localhost:900/api/v1",
+  baseUrl:
+    process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:9000/api/v1",
   prepareHeaders: (headers, { getState }) => {
-    // Get token from redux state
-    const token = getState()?.auth?.token;
-
-    if (token) {
-      headers.set("authorization", `Bearer ${token}`);
-    }
-
-    headers.set("content-type", "application/json");
+    // You can add auth headers here if needed
+    // const token = getState().auth.token;
+    // if (token) {
+    //   headers.set('authorization', `Bearer ${token}`);
+    // }
+    headers.set("Content-Type", "application/json");
     return headers;
   },
 });
@@ -18,6 +17,7 @@ const baseQuery = fetchBaseQuery({
 export const baseApi = createApi({
   reducerPath: "api",
   baseQuery,
-  tagTypes: ["User", "Service", "Category", "Booking"],
-  endpoints: () => ({}),
+  tagTypes: ["User", "Posts"], // Add your tag types here
+  endpoints: () => ({}), // endpoints will be injected from other API slices
+  keepUnusedDataFor: 60 * 5, // 5 minutes cache
 });
