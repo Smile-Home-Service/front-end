@@ -106,8 +106,8 @@ export default function SignInPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-rose-50 via-white to-indigo-50 flex items-center justify-center p-4">
-      <div className="min-w-md">
+    <div className="min-h-screen bg-gradient-to-br from-rose-50 via-white to-indigo-50 flex items-center justify-center px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-6xl">
         {/* Header */}
         <motion.div
           className="text-center mb-8"
@@ -182,7 +182,7 @@ export default function SignInPage() {
                         isLoading ||
                         phoneNumber.replace(/\D/g, "").length !== 10
                       }
-                      className="w-full flex justify-center items-center px-6 py-4 border border-transparent rounded-xl shadow-lg text-base font-semibold text-white bg-gradient-to-r from-indigo-600 to-rose-600 hover:from-indigo-700 hover:to-rose-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                      className="w-full flex justify-center items-center px-6 py-4 border border-transparent rounded-xl shadow-lg text-base font-semibold text-white bg-gradient-to-r from-indigo-600 to-rose-600 hover:from-indigo-700 hover:to-rose-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all hover:cursor-pointer"
                       whileHover={!isLoading ? { scale: 1.02 } : {}}
                       whileTap={!isLoading ? { scale: 0.98 } : {}}
                     >
@@ -223,7 +223,7 @@ export default function SignInPage() {
                         We sent a 6-digit code to {phoneNumber}
                       </p>
 
-                      <div className="flex justify-between space-x-2 mb-4">
+                      <div className="flex justify-center space-x-2 mb-4">
                         {otp.map((digit, index) => (
                           <motion.input
                             key={index}
@@ -266,7 +266,7 @@ export default function SignInPage() {
                     <motion.button
                       type="submit"
                       disabled={isLoading || otp.some((digit) => digit === "")}
-                      className="w-full flex justify-center items-center px-6 py-4 border border-transparent rounded-xl shadow-lg text-base font-semibold text-white bg-gradient-to-r from-indigo-600 to-rose-600 hover:from-indigo-700 hover:to-rose-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                      className="w-full flex justify-center items-center px-6 py-4 border border-transparent rounded-xl shadow-lg text-base font-semibold text-white bg-gradient-to-r from-indigo-600 to-rose-600 hover:from-indigo-700 hover:to-rose-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all hover:cursor-pointer"
                       whileHover={!isLoading ? { scale: 1.02 } : {}}
                       whileTap={!isLoading ? { scale: 0.98 } : {}}
                     >
