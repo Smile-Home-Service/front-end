@@ -8,6 +8,7 @@ import { baseApi } from "../api/base.api";
 // Import API slices
 import userReducer from "./slices/user.slice";
 import contactReducer from "./slices/contact.slice";
+import faqReducer from "./slices/faq.slice";
 
 // Persist config
 const persistConfig = {
@@ -21,6 +22,7 @@ const rootReducer = {
   [baseApi.reducerPath]: baseApi.reducer,
   user: userReducer,
   contact: contactReducer,
+  faq: faqReducer,
 };
 
 export const makeStore = () => {

@@ -1,10 +1,10 @@
 import { baseApi } from "./base.api";
 
-export const contactApi = baseApi.injectEndpoints({
+export const faqApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    getContacts: builder.query({
+    getFaqs: builder.query({
       query: (params = {}) => ({
-        url: "/contacts",
+        url: "/faq",
         params: {
           page: params.page || 1,
           limit: params.limit || 10,
@@ -12,27 +12,24 @@ export const contactApi = baseApi.injectEndpoints({
           ...params,
         },
       }),
-      providesTags: ["Contacts"],
+      providesTags: ["Faqs"],
       transformResponse: (response) => {
         return {
-          contact: response.items || response,
+          faq: response.items || response,
           pagination: response.pagination,
         };
       },
     }),
-    createContact: builder.mutation({
+    createFaq: builder.mutation({
       query: (contactData) => ({
         url: "/contact",
         method: "POST",
         body: contactData,
       }),
-      invalidatesTags: ["Contacts"],
+      invalidatesTags: ["Faqs"],
     }),
   }),
 });
 
-export const {
-  useGetContactsQuery,
-  useLazyGetContactsQuery,
-  useCreateContactMutation,
-} = contactApi;
+export const { useGetFaqsQuery, useLazyGetFaqsQuery, useCreateFaqMutation } =
+  faqApi;
