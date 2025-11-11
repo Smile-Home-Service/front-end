@@ -1,78 +1,22 @@
 "use client";
 import { useState } from "react";
-import Head from "next/head";
 import { motion } from "framer-motion";
-import {
-  faqItems,
-  contactMethods,
-  teamMembers,
-} from "../../utils/data/contact.data";
+import { contactMethods, teamMembers } from "../../utils/data/contact.data";
 import {
   Clock,
-  MessageSquare,
-  Send,
-  ChevronDown,
-  ChevronUp,
   Facebook,
   Twitter,
   Instagram,
-  User,
-  MailIcon,
-  HelpCircle,
   Heart,
-  Sparkles,
-  Baby,
-  PawPrint,
   Home,
   Shield,
   CheckCircle2,
 } from "lucide-react";
+import { ContactForm } from "@/components/contact/contact.form";
 
 export default function ContactUsPage() {
-  const [activeFaq, setActiveFaq] = useState(null);
-  const [formData, setFormData] = useState({
-    name: "",
-    phone_number: "",
-    subject: "",
-    message: "",
-  });
-
-  const toggleFaq = (index) => {
-    setActiveFaq(activeFaq === index ? null : index);
-  };
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Form submission logic would go here
-    alert(
-      "Thank you for your message! Our family support team will get back to you soon."
-    );
-    setFormData({
-      name: "",
-      email: "",
-      subject: "",
-      message: "",
-    });
-  };
-
   return (
     <div className="min-h-screen bg-linear-to-br from-rose-50 via-white to-indigo-50">
-      <Head>
-        <title>Contact Our Family Team | HomeServe</title>
-        <meta
-          name="description"
-          content="Get in touch with HomeServe's family support team for all your home service needs"
-        />
-      </Head>
-
       {/* Header */}
       <div className="relative bg-linear-to-r from-indigo-600 to-rose-600 overflow-hidden">
         {/* Background Elements */}
@@ -161,216 +105,7 @@ export default function ContactUsPage() {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Contact Form */}
-          <div className="lg:col-span-2">
-            <motion.div
-              className="bg-white rounded-2xl shadow-lg p-8 border border-gray-100"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <div className="flex items-center mb-6">
-                <div className="w-12 h-12 bg-linear-to-r from-indigo-600 to-rose-600 rounded-2xl flex items-center justify-center text-white mr-4">
-                  <MessageSquare className="h-6 w-6" />
-                </div>
-                <div>
-                  <h2 className="text-2xl font-bold text-gray-900">
-                    Send Us a Message
-                  </h2>
-                  <p className="text-gray-600">We'll get back to you quickly</p>
-                </div>
-              </div>
-
-              <form onSubmit={handleSubmit}>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label
-                      htmlFor="name"
-                      className="block text-sm font-medium text-gray-700 mb-2"
-                    >
-                      Your Name
-                    </label>
-                    <div className="relative">
-                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <User className="h-5 w-5 text-gray-400" />
-                      </div>
-                      <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleInputChange}
-                        className="block w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 bg-white/50"
-                        placeholder="Family name or your name"
-                        required
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="email"
-                      className="block text-sm font-medium text-gray-700 mb-2"
-                    >
-                      Email Address
-                    </label>
-                    <div className="relative">
-                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <MailIcon className="h-5 w-5 text-gray-400" />
-                      </div>
-                      <input
-                        type="number"
-                        id="number"
-                        name="phone_number"
-                        value={formData.phone_number}
-                        onChange={handleInputChange}
-                        className="block w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 bg-white/50"
-                        placeholder="(98x)-xxx-xxx-x"
-                        required
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-6">
-                  <label
-                    htmlFor="subject"
-                    className="block text-sm font-medium text-gray-700 mb-2"
-                  >
-                    How Can We Help Your Family?
-                  </label>
-                  <input
-                    type="text"
-                    id="subject"
-                    name="subject"
-                    value={formData.subject}
-                    onChange={handleInputChange}
-                    className="block w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 bg-white/50"
-                    placeholder="e.g., Emergency plumbing, regular cleaning, etc."
-                    required
-                  />
-                </div>
-
-                <div className="mt-6">
-                  <label
-                    htmlFor="message"
-                    className="block text-sm font-medium text-gray-700 mb-2"
-                  >
-                    Tell Us More
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows={5}
-                    value={formData.message}
-                    onChange={handleInputChange}
-                    className="block w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 bg-white/50"
-                    placeholder="Please include any family considerations like pets, children's schedules, or special needs..."
-                    required
-                  />
-                </div>
-
-                {/* Family Considerations */}
-                <div className="mt-6 bg-linear-to-r from-indigo-50 to-rose-50 rounded-xl p-4">
-                  <div className="flex items-center text-sm text-gray-700">
-                    <Sparkles className="w-4 h-4 text-indigo-600 mr-2" />
-                    <span className="font-medium">
-                      Family-Friendly Service:
-                    </span>
-                  </div>
-                  <div className="grid grid-cols-2 gap-2 mt-2 text-xs text-gray-600">
-                    <div className="flex items-center">
-                      <Baby className="w-3 h-3 mr-1 text-rose-500" />
-                      Child-safe products
-                    </div>
-                    <div className="flex items-center">
-                      <PawPrint className="w-3 h-3 mr-1 text-rose-500" />
-                      Pet-friendly pros
-                    </div>
-                    <div className="flex items-center">
-                      <Clock className="w-3 h-3 mr-1 text-rose-500" />
-                      Flexible scheduling
-                    </div>
-                    <div className="flex items-center">
-                      <Shield className="w-3 h-3 mr-1 text-rose-500" />
-                      Background checked
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-6">
-                  <motion.button
-                    type="submit"
-                    className="w-full flex justify-center items-center px-6 py-4 border border-transparent rounded-xl shadow-lg text-base font-semibold text-white bg-linear-to-r from-indigo-600 to-rose-600 hover:from-indigo-700 hover:to-rose-700 transition-all"
-                    whileHover={{
-                      scale: 1.02,
-                      boxShadow: "0 10px 25px -5px rgba(79, 70, 229, 0.4)",
-                    }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    Send to Family Support Team
-                    <Send className="ml-2 h-4 w-4" />
-                  </motion.button>
-                </div>
-              </form>
-            </motion.div>
-
-            {/* FAQ Section */}
-            <motion.div
-              className="mt-12 bg-white rounded-2xl shadow-lg p-8 border border-gray-100"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              <div className="flex items-center mb-6">
-                <div className="w-12 h-12 bg-linear-to-r from-indigo-600 to-rose-600 rounded-2xl flex items-center justify-center text-white mr-4">
-                  <HelpCircle className="h-6 w-6" />
-                </div>
-                <div>
-                  <h2 className="text-2xl font-bold text-gray-900">
-                    Family Questions Answered
-                  </h2>
-                  <p className="text-gray-600">
-                    Common questions from families like yours
-                  </p>
-                </div>
-              </div>
-
-              <div className="space-y-4">
-                {faqItems.map((faq, index) => (
-                  <motion.div
-                    key={index}
-                    className="bg-gray-50 rounded-xl p-4 hover:bg-gray-100 transition-colors"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3, delay: index * 0.1 }}
-                  >
-                    <button
-                      onClick={() => toggleFaq(index)}
-                      className="flex justify-between items-center w-full text-left font-semibold text-gray-900 hover:text-indigo-600"
-                    >
-                      <span className="text-lg">{faq.question}</span>
-                      {activeFaq === index ? (
-                        <ChevronUp className="h-5 w-5 text-indigo-600" />
-                      ) : (
-                        <ChevronDown className="h-5 w-5 text-gray-500" />
-                      )}
-                    </button>
-                    {activeFaq === index && (
-                      <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: "auto" }}
-                        exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.3 }}
-                        className="mt-3 text-gray-600 leading-relaxed border-t border-gray-200 pt-3"
-                      >
-                        {faq.answer}
-                      </motion.div>
-                    )}
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          </div>
-
+          <ContactForm />
           {/* Sidebar */}
           <div className="lg:col-span-1 space-y-8">
             {/* Family Support Hours */}

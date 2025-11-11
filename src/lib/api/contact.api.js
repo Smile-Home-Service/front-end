@@ -20,7 +20,19 @@ export const contactApi = baseApi.injectEndpoints({
         };
       },
     }),
+    createContact: builder.mutation({
+      query: (contactData) => ({
+        url: "/contact",
+        method: "POST",
+        body: contactData,
+      }),
+      invalidatesTags: ["Contacts"],
+    }),
   }),
 });
 
-export const { useGetContactsQuery, useLazyGetContactsQuery } = contactApi;
+export const {
+  useGetContactsQuery,
+  useLazyGetContactsQuery,
+  useCreateContactMutation,
+} = contactApi;

@@ -7,10 +7,7 @@ import { baseApi } from "../api/base.api";
 
 // Import API slices
 import userReducer from "./slices/user.slice";
-
-// Import injected APIs (no need to import their middleware separately)
-import { userApi } from "../api/user.api";
-import { testimonialsApi } from "../api/testimonial.api";
+import contactReducer from "./slices/contact.slice";
 
 // Persist config
 const persistConfig = {
@@ -22,9 +19,8 @@ const persistConfig = {
 
 const rootReducer = {
   [baseApi.reducerPath]: baseApi.reducer,
-  // Note: userApi and testimonialsApi are already included in baseApi.reducer
-  // because they use injectEndpoints
   user: userReducer,
+  contact: contactReducer,
 };
 
 export const makeStore = () => {

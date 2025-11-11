@@ -1,34 +1,38 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  currentUser: null,
-  isAuthenticated: false,
   loading: false,
+  success: false,
+  error: null,
 };
 
-const userSlice = createSlice({
+const contactSlice = createSlice({
   name: "contact",
   initialState,
   reducers: {
-    setUser: (state, action) => {
-      state.currentUser = action.payload;
-      state.isAuthenticated = true;
-    },
-    clearUser: (state) => {
-      state.currentUser = null;
-      state.isAuthenticated = false;
-    },
     setLoading: (state, action) => {
       state.loading = action.payload;
+    },
+    setSuccess: (state, action) => {
+      state.success = action.payload;
+    },
+    setError: (state, action) => {
+      state.error = action.payload;
+    },
+    clearContactState: (state) => {
+      state.loading = false;
+      state.success = false;
+      state.error = null;
     },
   },
 });
 
-export const { setUser, clearUser, setLoading } = userSlice.actions;
+export const { setLoading, setSuccess, setError, clearContactState } =
+  contactSlice.actions;
 
 // Selectors
-export const selectCurrentUser = (state) => state.user.currentUser;
-export const selectIsAuthenticated = (state) => state.user.isAuthenticated;
-export const selectUserLoading = (state) => state.user.loading;
+export const selectContactLoading = (state) => state.contact.loading;
+export const selectContactSuccess = (state) => state.contact.success;
+export const selectContactError = (state) => state.contact.error;
 
-export default userSlice.reducer;
+export default contactSlice.reducer;
