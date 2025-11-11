@@ -3,9 +3,11 @@ import { useState } from "react";
 import Head from "next/head";
 import { motion } from "framer-motion";
 import {
-  Phone,
-  Mail,
-  MapPin,
+  faqItems,
+  contactMethods,
+  teamMembers,
+} from "../../utils/data/contact.data";
+import {
   Clock,
   MessageSquare,
   Send,
@@ -14,7 +16,6 @@ import {
   Facebook,
   Twitter,
   Instagram,
-  Linkedin,
   User,
   MailIcon,
   HelpCircle,
@@ -31,7 +32,7 @@ export default function ContactUsPage() {
   const [activeFaq, setActiveFaq] = useState(null);
   const [formData, setFormData] = useState({
     name: "",
-    email: "",
+    phone_number: "",
     subject: "",
     message: "",
   });
@@ -62,96 +63,8 @@ export default function ContactUsPage() {
     });
   };
 
-  const contactMethods = [
-    {
-      icon: <Phone className="h-6 w-6" />,
-      title: "Family Support Line",
-      details: "+1 (555) 123-FAMILY",
-      description: "Mon-Fri from 7am to 9pm",
-      action: "Call Now",
-      color: "from-blue-500 to-cyan-500",
-      emergency: true,
-    },
-    {
-      icon: <Mail className="h-6 w-6" />,
-      title: "Email Our Team",
-      details: "family@homeserve.com",
-      description: "We reply within 2 hours",
-      action: "Send Email",
-      color: "from-rose-500 to-pink-500",
-    },
-    {
-      icon: <MessageSquare className="h-6 w-6" />,
-      title: "Instant Chat",
-      details: "Available 24/7",
-      description: "Get help while managing kids",
-      action: "Start Chat",
-      color: "from-emerald-500 to-teal-500",
-    },
-    {
-      icon: <MapPin className="h-6 w-6" />,
-      title: "Service Areas",
-      details: "50+ Cities Covered",
-      description: "Growing to serve more families",
-      action: "Check Availability",
-      color: "from-amber-500 to-orange-500",
-    },
-  ];
-
-  const faqItems = [
-    {
-      question: "How quickly can you help with family emergencies?",
-      answer:
-        "We prioritize family emergencies and aim to respond within 30 minutes. For urgent issues like plumbing leaks or electrical problems, we have emergency teams available 24/7 to keep your family safe and comfortable.",
-    },
-    {
-      question: "Are your services safe for children and pets?",
-      answer:
-        "Absolutely! All our professionals use child-safe and pet-friendly products. We conduct thorough background checks and provide special training for working in family homes. Your family's safety is our top priority.",
-    },
-    {
-      question: "Can I schedule around my children's activities?",
-      answer:
-        "Yes! We understand family schedules can be hectic. Our flexible scheduling allows you to book services around school runs, naptimes, and extracurricular activities. Evening and weekend appointments are available.",
-    },
-    {
-      question: "What if I need to reschedule last minute?",
-      answer:
-        "No worries! We offer free rescheduling for family emergencies or unexpected events. Just give us a call or message us through the app - we know family life can be unpredictable!",
-    },
-    {
-      question: "Do you offer senior or family discounts?",
-      answer:
-        "We offer special pricing for seniors, military families, and households with multiple children. We also have bundle packages for regular home maintenance that help families save throughout the year.",
-    },
-  ];
-
-  const teamMembers = [
-    {
-      name: "Sarah Johnson",
-      role: "Family Support Manager",
-      image:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
-      specialties: ["Child Safety", "Flexible Scheduling"],
-    },
-    {
-      name: "Michael Chen",
-      role: "Service Coordinator",
-      image:
-        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
-      specialties: ["Emergency Response", "Pet-Friendly Services"],
-    },
-    {
-      name: "Emma Rodriguez",
-      role: "Family Experience Specialist",
-      image:
-        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
-      specialties: ["Senior Care", "Family Discounts"],
-    },
-  ];
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-rose-50 via-white to-indigo-50">
+    <div className="min-h-screen bg-linear-to-br from-rose-50 via-white to-indigo-50">
       <Head>
         <title>Contact Our Family Team | HomeServe</title>
         <meta
@@ -161,7 +74,7 @@ export default function ContactUsPage() {
       </Head>
 
       {/* Header */}
-      <div className="relative bg-gradient-to-r from-indigo-600 to-rose-600 overflow-hidden">
+      <div className="relative bg-linear-to-r from-indigo-600 to-rose-600 overflow-hidden">
         {/* Background Elements */}
         <div className="absolute inset-0">
           <div className="absolute top-0 left-0 w-72 h-72 bg-white/10 rounded-full mix-blend-soft-light"></div>
@@ -187,7 +100,7 @@ export default function ContactUsPage() {
               transition={{ duration: 0.7, delay: 0.1 }}
             >
               We're Here for
-              <span className="block bg-gradient-to-r from-white to-rose-100 bg-clip-text text-transparent mt-2">
+              <span className="block bg-linear-to-r from-white to-rose-100 bg-clip-text text-transparent mt-2">
                 Your Family
               </span>
             </motion.h1>
@@ -221,7 +134,7 @@ export default function ContactUsPage() {
             >
               <div className="flex justify-center">
                 <div
-                  className={`bg-gradient-to-r ${method.color} rounded-2xl p-3 text-white shadow-lg`}
+                  className={`bg-linear-to-r ${method.color} rounded-2xl p-3 text-white shadow-lg`}
                 >
                   {method.icon}
                 </div>
@@ -256,7 +169,7 @@ export default function ContactUsPage() {
               transition={{ duration: 0.5 }}
             >
               <div className="flex items-center mb-6">
-                <div className="w-12 h-12 bg-gradient-to-r from-indigo-600 to-rose-600 rounded-2xl flex items-center justify-center text-white mr-4">
+                <div className="w-12 h-12 bg-linear-to-r from-indigo-600 to-rose-600 rounded-2xl flex items-center justify-center text-white mr-4">
                   <MessageSquare className="h-6 w-6" />
                 </div>
                 <div>
@@ -304,13 +217,13 @@ export default function ContactUsPage() {
                         <MailIcon className="h-5 w-5 text-gray-400" />
                       </div>
                       <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={formData.email}
+                        type="number"
+                        id="number"
+                        name="phone_number"
+                        value={formData.phone_number}
                         onChange={handleInputChange}
                         className="block w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 bg-white/50"
-                        placeholder="your.family@email.com"
+                        placeholder="(98x)-xxx-xxx-x"
                         required
                       />
                     </div>
@@ -356,7 +269,7 @@ export default function ContactUsPage() {
                 </div>
 
                 {/* Family Considerations */}
-                <div className="mt-6 bg-gradient-to-r from-indigo-50 to-rose-50 rounded-xl p-4">
+                <div className="mt-6 bg-linear-to-r from-indigo-50 to-rose-50 rounded-xl p-4">
                   <div className="flex items-center text-sm text-gray-700">
                     <Sparkles className="w-4 h-4 text-indigo-600 mr-2" />
                     <span className="font-medium">
@@ -386,7 +299,7 @@ export default function ContactUsPage() {
                 <div className="mt-6">
                   <motion.button
                     type="submit"
-                    className="w-full flex justify-center items-center px-6 py-4 border border-transparent rounded-xl shadow-lg text-base font-semibold text-white bg-gradient-to-r from-indigo-600 to-rose-600 hover:from-indigo-700 hover:to-rose-700 transition-all"
+                    className="w-full flex justify-center items-center px-6 py-4 border border-transparent rounded-xl shadow-lg text-base font-semibold text-white bg-linear-to-r from-indigo-600 to-rose-600 hover:from-indigo-700 hover:to-rose-700 transition-all"
                     whileHover={{
                       scale: 1.02,
                       boxShadow: "0 10px 25px -5px rgba(79, 70, 229, 0.4)",
@@ -408,7 +321,7 @@ export default function ContactUsPage() {
               transition={{ duration: 0.5, delay: 0.2 }}
             >
               <div className="flex items-center mb-6">
-                <div className="w-12 h-12 bg-gradient-to-r from-indigo-600 to-rose-600 rounded-2xl flex items-center justify-center text-white mr-4">
+                <div className="w-12 h-12 bg-linear-to-r from-indigo-600 to-rose-600 rounded-2xl flex items-center justify-center text-white mr-4">
                   <HelpCircle className="h-6 w-6" />
                 </div>
                 <div>
@@ -468,7 +381,7 @@ export default function ContactUsPage() {
               transition={{ duration: 0.5 }}
             >
               <div className="flex items-center mb-4">
-                <div className="w-10 h-10 bg-gradient-to-r from-indigo-600 to-rose-600 rounded-xl flex items-center justify-center text-white mr-3">
+                <div className="w-10 h-10 bg-linear-to-r from-indigo-600 to-rose-600 rounded-xl flex items-center justify-center text-white mr-3">
                   <Clock className="h-5 w-5" />
                 </div>
                 <h2 className="text-xl font-bold text-gray-900">
@@ -509,7 +422,7 @@ export default function ContactUsPage() {
               transition={{ duration: 0.5, delay: 0.1 }}
             >
               <div className="flex items-center mb-4">
-                <div className="w-10 h-10 bg-gradient-to-r from-indigo-600 to-rose-600 rounded-xl flex items-center justify-center text-white mr-3">
+                <div className="w-10 h-10 bg-linear-to-r from-indigo-600 to-rose-600 rounded-xl flex items-center justify-center text-white mr-3">
                   <Heart className="h-5 w-5" />
                 </div>
                 <h2 className="text-xl font-bold text-gray-900">
@@ -530,7 +443,7 @@ export default function ContactUsPage() {
                     <img
                       src={member.image}
                       alt={member.name}
-                      className="h-12 w-12 rounded-xl object-cover flex-shrink-0"
+                      className="h-12 w-12 rounded-xl object-cover shrink-0"
                     />
                     <div className="ml-4 flex-1">
                       <h3 className="text-sm font-semibold text-gray-900">
@@ -557,7 +470,7 @@ export default function ContactUsPage() {
 
             {/* Family Community */}
             <motion.div
-              className="bg-gradient-to-br from-indigo-600 to-rose-600 rounded-2xl p-6 text-white"
+              className="bg-linear-to-br from-indigo-600 to-rose-600 rounded-2xl p-6 text-white"
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
@@ -601,7 +514,7 @@ export default function ContactUsPage() {
 
       {/* Family Promise Section */}
       <motion.div
-        className="bg-gradient-to-r from-indigo-50 to-rose-50 py-16"
+        className="bg-linear-to-r from-indigo-50 to-rose-50 py-16"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.3 }}
@@ -640,7 +553,7 @@ export default function ContactUsPage() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <div className="w-16 h-16 bg-gradient-to-r from-indigo-600 to-rose-600 rounded-2xl flex items-center justify-center text-white mx-auto mb-4">
+                <div className="w-16 h-16 bg-linear-to-r from-indigo-600 to-rose-600 rounded-2xl flex items-center justify-center text-white mx-auto mb-4">
                   {promise.icon}
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">

@@ -16,7 +16,6 @@ export const testimonialsApi = baseApi.injectEndpoints({
       }),
       providesTags: ["Testimonials"],
       transformResponse: (response) => {
-        // ✅ Normalize backend fields to what the frontend expects
         const items = (response.items || []).map((item) => ({
           id: item.id,
           name: item.fullname,
