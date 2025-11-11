@@ -1,10 +1,16 @@
 "use client";
 
 import { Provider } from "react-redux";
-import { wrapper } from "../store/store";
+import { useRef } from "react";
+import { makeStore } from "../store/store";
 
 export default function ReduxProvider({ children }) {
-  const { store } = wrapper.useWrappedStore(children);
+  const storeRef = useRef();
 
-  return <Provider store={store}>{children}</Provider>;
+  if (!storeRef.current) {
+    // Create the store instance the first time this renders
+    storeRef.current = makeStore();
+  }
+
+  return <Provider store={storeRef.current}>{children}</Provider>;
 }

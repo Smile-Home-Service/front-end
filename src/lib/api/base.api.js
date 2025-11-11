@@ -17,7 +17,7 @@ const baseQuery = fetchBaseQuery({
 export const baseApi = createApi({
   reducerPath: "api",
   baseQuery,
-  tagTypes: ["User", "Posts"], // Add your tag types here
+  tagTypes: ["User", "Testimonials"], // Add your tag types here
   endpoints: () => ({}), // endpoints will be injected from other API slices
   keepUnusedDataFor: 60 * 5, // 5 minutes cache
 });
