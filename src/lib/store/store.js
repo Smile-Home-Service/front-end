@@ -1,6 +1,7 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { createWrapper } from "next-redux-wrapper";
+import { persistStore, persistReducer } from "redux-persist";
 import storage from "./storage";
 
 import { baseApi } from "../api/base.api";
@@ -14,20 +15,24 @@ import faqReducer from "./slices/faq.slice";
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["user"],
-  blacklist: [baseApi.reducerPath],
+  whitelist: ["user"], // Only persist user slice
+  blacklist: [baseApi.reducerPath], // Don't persist API cache
 };
 
-const rootReducer = {
+// Combine all reducers
+const rootReducer = combineReducers({
   [baseApi.reducerPath]: baseApi.reducer,
   user: userReducer,
   contact: contactReducer,
   faq: faqReducer,
-};
+});
+
+// Create persisted reducer
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const makeStore = () => {
   const store = configureStore({
-    reducer: rootReducer,
+    reducer: persistedReducer,
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
         serializableCheck: {
