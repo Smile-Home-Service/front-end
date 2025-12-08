@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, redirect } from "next/navigation";
 import {
   HeartHandshake,
   User,
@@ -40,7 +40,7 @@ export default function Navbar() {
   ];
 
   const handleSignIn = () => {
-    // redirect("sign-in");
+    redirect("sign-in");
     console.log("Sign in clicked");
   };
 
