@@ -4,7 +4,7 @@ export const faqApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getFaqs: builder.query({
       query: (params = {}) => ({
-        url: "/faq",
+        url: "/faqs",
         params: {
           page: params.page || 1,
           limit: params.limit || 10,
@@ -21,10 +21,10 @@ export const faqApi = baseApi.injectEndpoints({
       },
     }),
     createFaq: builder.mutation({
-      query: (contactData) => ({
-        url: "/contact",
+      query: (faqData) => ({
+        url: "/faq",
         method: "POST",
-        body: contactData,
+        body: faqData,
       }),
       invalidatesTags: ["Faqs"],
     }),

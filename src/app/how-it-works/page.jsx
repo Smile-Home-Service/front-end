@@ -10,11 +10,9 @@ import {
   Star,
   Clock,
   Shield,
-  ArrowRight,
   Search,
   Wrench,
   Sparkles,
-  Home,
   Truck,
   Leaf,
   Settings,
@@ -645,76 +643,6 @@ export default function HowItWorks() {
               </motion.div>
             ))}
           </div>
-        </div>
-      </div>
-
-      {/* CTA Section */}
-      <div className="relative bg-gradient-to-r from-indigo-600 to-rose-600 py-20 overflow-hidden">
-        {/* Background Elements */}
-        <div className="absolute inset-0">
-          <div className="absolute top-0 right-0 w-80 h-80 bg-white/10 rounded-full mix-blend-soft-light"></div>
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-rose-500/20 rounded-full mix-blend-soft-light"></div>
-        </div>
-
-        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.h2
-            className="text-3xl font-bold text-white sm:text-4xl lg:text-5xl"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            viewport={{ once: true }}
-          >
-            Ready for a Happier Home?
-          </motion.h2>
-          <motion.p
-            className="mt-6 text-xl text-indigo-100 max-w-2xl mx-auto leading-relaxed"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
-            Join thousands of families who trust us to make their homes cleaner,
-            safer, and more beautiful
-          </motion.p>
-          <motion.div
-            className="mt-10 flex flex-col sm:flex-row gap-4 justify-center"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.4 }}
-            viewport={{ once: true }}
-          >
-            <motion.button
-              className="inline-flex items-center px-8 py-4 text-lg font-semibold text-indigo-900 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all"
-              whileHover={{
-                scale: 1.05,
-                boxShadow: "0 20px 40px -10px rgba(0, 0, 0, 0.3)",
-              }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Find Your Helper Today
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </motion.button>
-            <motion.button
-              className="inline-flex items-center px-8 py-4 text-lg font-semibold text-white border-2 border-white/30 rounded-2xl hover:bg-white/10 transition-all"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              View Family Services
-            </motion.button>
-          </motion.div>
-
-          <motion.div
-            className="mt-8 flex items-center justify-center text-indigo-200 text-sm"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.7, delay: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <Heart className="w-4 h-4 mr-2" />
-            <span>
-              No advance payment • Free rescheduling • 24/7 family support
-            </span>
-          </motion.div>
         </div>
       </div>
     </div>
