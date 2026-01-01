@@ -1,4 +1,14 @@
-const SignInBenefits = () => {
+import { motion } from "framer-motion";
+import { CheckCircle, Shield } from "lucide-react";
+
+const benefits = [
+  "Book services in 60 seconds",
+  "Track your service history",
+  "Manage family appointments",
+  "Exclusive member offers",
+];
+
+export const SignInBenefits = () => {
   return (
     <div>
       <motion.div

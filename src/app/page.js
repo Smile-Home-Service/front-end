@@ -12,7 +12,7 @@ export default function HomeServiceApp() {
       <HeroSection />
       <ServicesSection />
       <HowItWorks />
-      <Testimonials />
+      {/* <Testimonials /> */}
       <LocationsSection />
     </div>
   );

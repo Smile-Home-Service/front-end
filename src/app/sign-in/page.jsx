@@ -4,14 +4,13 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Phone,
-  Shield,
   ArrowLeft,
   HeartHandshake,
   CheckCircle,
   Clock,
 } from "lucide-react";
 
-import SignInBenefits from "./components/signin.benefits";
+import { SignInBenefits } from "./components/signin.benefits";
 
 export default function SignInPage() {
   const [step, setStep] = useState("phone");
