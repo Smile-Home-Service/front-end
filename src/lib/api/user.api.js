@@ -20,7 +20,33 @@ export const userApi = baseApi.injectEndpoints({
         };
       },
     }),
+    sendOtp: builder.mutation({
+      query: (body) => ({
+        url: "/users/send-otp",
+        method: "POST",
+        body,
+      }),
+    }),
+    verifyOtp: builder.mutation({
+      query: (body) => ({
+        url: "/users/verify-otp",
+        method: "POST",
+        body,
+      }),
+    }),
+    logout: builder.mutation({
+      query: () => ({
+        url: "/users/logout",
+        method: "POST",
+      }),
+    }),
   }),
 });
 
-export const { useGetUsersQuery, useLazyGetUsersQuery } = userApi;
+export const {
+  useGetUsersQuery,
+  useLazyGetUsersQuery,
+  useSendOtpMutation,
+  useVerifyOtpMutation,
+  useLogoutMutation,
+} = userApi;

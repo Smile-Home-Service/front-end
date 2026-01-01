@@ -12,11 +12,22 @@ import {
   Menu,
   X,
 } from "lucide-react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  selectIsAuthenticated,
+  selectCurrentUser,
+  clearUser,
+} from "@/lib/store/slices/user.slice";
+import { useLogoutMutation } from "@/lib/api/user.api";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
+  const dispatch = useDispatch();
+  const isAuthenticated = useSelector(selectIsAuthenticated);
+  const currentUser = useSelector(selectCurrentUser);
+  const [logout] = useLogoutMutation();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
@@ -40,8 +51,19 @@ export default function Navbar() {
   ];
 
   const handleSignIn = () => {
-    redirect("sign-in");
-    console.log("Sign in clicked");
+    window.location.href = "/sign-in";
+  };
+
+  const handleLogout = async () => {
+    try {
+      await logout().unwrap();
+      dispatch(clearUser());
+      window.location.href = "/";
+    } catch (error) {
+      console.error("Logout failed:", error);
+      dispatch(clearUser()); // Clear local state anyway
+      window.location.href = "/";
+    }
   };
 
   // Helper function to check if a link is active
@@ -106,17 +128,29 @@ export default function Navbar() {
 
             {/* Desktop CTA Buttons */}
             <div className="hidden lg:flex lg:items-center lg:space-x-3">
-              <button
-                className="flex items-center px-4 py-2 rounded-2xl text-sm font-medium text-gray-700 bg-gray-100/80 hover:bg-gray-200/80 backdrop-blur-sm transition-colors hover:cursor-pointer"
-                onClick={() => handleSignIn()}
-              >
-                <User className="w-4 h-4 mr-2" />
-                Sign In
-              </button>
-              <button className="flex items-center px-6 py-2 rounded-2xl text-sm font-semibold text-white bg-gradient-to-r from-indigo-600 to-rose-600 hover:from-indigo-700 hover:to-rose-700 shadow-lg hover:shadow-xl transition-all hover:cursor-pointer">
-                <LogIn className="w-4 h-4 mr-2" />
-                Become a Member
-              </button>
+              {isAuthenticated ? (
+                <a
+                  href="/profile"
+                  className="flex items-center px-6 py-2 rounded-2xl text-sm font-semibold text-white bg-gradient-to-r from-indigo-600 to-rose-600 hover:from-indigo-700 hover:to-rose-700 shadow-lg hover:shadow-xl transition-all"
+                >
+                  <User className="w-4 h-4 mr-2" />
+                  Profile
+                </a>
+              ) : (
+                <>
+                  <button
+                    className="flex items-center px-4 py-2 rounded-2xl text-sm font-medium text-gray-700 bg-gray-100/80 hover:bg-gray-200/80 backdrop-blur-sm transition-colors hover:cursor-pointer"
+                    onClick={handleSignIn}
+                  >
+                    <User className="w-4 h-4 mr-2" />
+                    Sign In
+                  </button>
+                  <button className="flex items-center px-6 py-2 rounded-2xl text-sm font-semibold text-white bg-gradient-to-r from-indigo-600 to-rose-600 hover:from-indigo-700 hover:to-rose-700 shadow-lg hover:shadow-xl transition-all hover:cursor-pointer">
+                    <LogIn className="w-4 h-4 mr-2" />
+                    Become a Member
+                  </button>
+                </>
+              )}
             </div>
 
             {/* Mobile Menu Button */}
@@ -191,20 +225,45 @@ export default function Navbar() {
 
               {/* CTA Buttons */}
               <div className="mt-8 pt-6 border-t border-gray-100/50 space-y-3">
-                <button
-                  className="flex items-center justify-center w-full px-4 py-4 rounded-2xl text-base font-medium text-gray-700 bg-gray-100/80 hover:bg-gray-200/80 transition-colors"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  <User className="w-5 h-5 mr-2" />
-                  Sign In
-                </button>
-                <button
-                  className="flex items-center justify-center w-full px-4 py-4 rounded-2xl text-base font-semibold text-white bg-gradient-to-r from-indigo-600 to-rose-600 hover:from-indigo-700 hover:to-rose-700 shadow-lg transition-all"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  <LogIn className="w-5 h-5 mr-2" />
-                  Book Service Now
-                </button>
+                {isAuthenticated ? (
+                  <>
+                    <a
+                      href="/profile"
+                      className="flex items-center justify-center w-full px-4 py-4 rounded-2xl text-base font-medium text-indigo-700 bg-indigo-50 border border-indigo-100"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      <User className="w-5 h-5 mr-2" />
+                      View Profile
+                    </a>
+                    <button
+                      className="flex items-center justify-center w-full px-4 py-4 rounded-2xl text-base font-medium text-rose-600 bg-rose-50 border border-rose-100"
+                      onClick={handleLogout}
+                    >
+                      <LogIn className="w-5 h-5 mr-2" />
+                      Sign Out
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <button
+                      className="flex items-center justify-center w-full px-4 py-4 rounded-2xl text-base font-medium text-gray-700 bg-gray-100/80 hover:bg-gray-200/80 transition-colors"
+                      onClick={() => {
+                        handleSignIn();
+                        setIsMenuOpen(false);
+                      }}
+                    >
+                      <User className="w-5 h-5 mr-2" />
+                      Sign In
+                    </button>
+                    <button
+                      className="flex items-center justify-center w-full px-4 py-4 rounded-2xl text-base font-semibold text-white bg-gradient-to-r from-indigo-600 to-rose-600 hover:from-indigo-700 hover:to-rose-700 shadow-lg transition-all"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      <LogIn className="w-5 h-5 mr-2" />
+                      Book Service Now
+                    </button>
+                  </>
+                )}
               </div>
 
               {/* Contact Info */}

@@ -12,15 +12,23 @@ import {
 } from "lucide-react";
 
 import { SignInBenefits } from "./components/signin.benefits";
+import { useSendOtpMutation, useVerifyOtpMutation } from "@/lib/api/user.api";
+import { useDispatch } from "react-redux";
+import { setUser } from "@/lib/store/slices/user.slice";
 
 export default function SignInPage() {
   const [step, setStep] = useState("phone");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
-  const [isLoading, setIsLoading] = useState(false);
   const [countdown, setCountdown] = useState(0);
   const [showResend, setShowResend] = useState(false);
   const router = useRouter();
+  const dispatch = useDispatch();
+
+  const [sendOtp, { isLoading: isSendingOtp }] = useSendOtpMutation();
+  const [verifyOtp, { isLoading: isVerifyingOtp }] = useVerifyOtpMutation();
+
+  const isLoading = isSendingOtp || isVerifyingOtp;
 
   // Countdown timer for OTP resend
   useEffect(() => {
@@ -34,39 +42,63 @@ export default function SignInPage() {
 
   const handlePhoneSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
+    const rawPhone = phoneNumber.replace(/\D/g, "");
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-
-    setIsLoading(false);
-    setStep("otp");
-    setCountdown(30); // 30 seconds countdown
-    setShowResend(false);
+    try {
+      await sendOtp({ phone_number: rawPhone }).unwrap();
+      setStep("otp");
+      setCountdown(30);
+      setShowResend(false);
+    } catch (error) {
+      console.error("Failed to send OTP:", error);
+      alert(
+        error?.data?.message ||
+          "Failed to send verification code. Please try again."
+      );
+    }
   };
 
   const handleOtpSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
+    const otpValue = otp.join("");
+    const rawPhone = phoneNumber.replace(/\D/g, "");
 
-    // Simulate OTP verification
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    try {
+      const response = await verifyOtp({
+        phone_number: rawPhone,
+        otp: otpValue,
+      }).unwrap();
 
-    setIsLoading(false);
-    // Here you would typically verify the OTP and redirect
-    router.push("/profile");
+      // Assuming response contains user data and accessToken
+      if (response.user) {
+        dispatch(
+          setUser({
+            user: response.user,
+            token: response.accessToken,
+          })
+        );
+      }
+
+      router.push("/profile");
+    } catch (error) {
+      console.error("Failed to verify OTP:", error);
+      alert(
+        error?.data?.message || "Invalid verification code. Please try again."
+      );
+    }
   };
 
   const handleResendOtp = async () => {
-    setIsLoading(true);
+    const rawPhone = phoneNumber.replace(/\D/g, "");
     setOtp(["", "", "", "", "", ""]);
 
-    // Simulate resend OTP
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    setIsLoading(false);
-    setCountdown(30);
-    setShowResend(false);
+    try {
+      await sendOtp({ phone: rawPhone }).unwrap();
+      setCountdown(30);
+      setShowResend(false);
+    } catch (error) {
+      console.error("Failed to resend OTP:", error);
+    }
   };
 
   const handleOtpChange = (value, index) => {

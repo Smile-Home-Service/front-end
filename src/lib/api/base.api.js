@@ -4,11 +4,10 @@ const baseQuery = fetchBaseQuery({
   baseUrl:
     process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:9000/api/v1",
   prepareHeaders: (headers, { getState }) => {
-    // You can add auth headers here if needed
-    // const token = getState().auth.token;
-    // if (token) {
-    //   headers.set('authorization', `Bearer ${token}`);
-    // }
+    const token = getState().user?.token;
+    if (token) {
+      headers.set("authorization", `Bearer ${token}`);
+    }
     headers.set("Content-Type", "application/json");
     return headers;
   },

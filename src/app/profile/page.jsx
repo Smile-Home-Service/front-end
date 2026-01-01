@@ -17,17 +17,38 @@ import {
   Heart,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  selectCurrentUser,
+  selectIsAuthenticated,
+  clearUser,
+} from "@/lib/store/slices/user.slice";
+import { useLogoutMutation } from "@/lib/api/user.api";
 
 export default function ProfilePage() {
   const router = useRouter();
+  const dispatch = useDispatch();
+  const currentUser = useSelector(selectCurrentUser);
+  const isAuthenticated = useSelector(selectIsAuthenticated);
+  const [logoutApi] = useLogoutMutation();
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      router.push("/sign-in");
+    }
+  }, [isAuthenticated, router]);
+
+  if (!isAuthenticated || !currentUser) return null;
 
   const user = {
-    name: "Abishek Khanal",
-    email: "abishek@example.com",
-    phone: "+977 9800000000",
-    address: "Kathmandu, Nepal",
-    joinDate: "Member since Jan 2024",
-    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Abishek",
+    name: "User", // Default if not in currentUser
+    email: "Not provided",
+    phone: currentUser.phoneNumber || "Not provided",
+    address: "Not provided",
+    joinDate: "Member since 2024",
+    avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=${currentUser.phoneNumber}`,
+    ...currentUser,
   };
 
   const stats = [
@@ -97,9 +118,16 @@ export default function ProfilePage() {
     },
   ];
 
-  const handleLogout = () => {
-    // Implement logout logic here
-    router.push("/sign-in");
+  const handleLogout = async () => {
+    try {
+      await logoutApi().unwrap();
+      dispatch(clearUser());
+      router.push("/sign-in");
+    } catch (error) {
+      console.error("Logout failed:", error);
+      dispatch(clearUser());
+      router.push("/sign-in");
+    }
   };
 
   return (
