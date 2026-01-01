@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Phone,
@@ -19,6 +20,7 @@ export default function SignInPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [countdown, setCountdown] = useState(0);
   const [showResend, setShowResend] = useState(false);
+  const router = useRouter();
 
   // Countdown timer for OTP resend
   useEffect(() => {
@@ -52,7 +54,7 @@ export default function SignInPage() {
 
     setIsLoading(false);
     // Here you would typically verify the OTP and redirect
-    alert("Successfully signed in!");
+    router.push("/profile");
   };
 
   const handleResendOtp = async () => {
@@ -68,10 +70,11 @@ export default function SignInPage() {
   };
 
   const handleOtpChange = (value, index) => {
-    if (!/^\d?$/.test(value)) return;
+    // Take only the last character entered if value is longer than 1
+    const char = value.slice(-1);
 
     const newOtp = [...otp];
-    newOtp[index] = value;
+    newOtp[index] = char;
     setOtp(newOtp);
 
     // Auto-focus next input
@@ -230,8 +233,6 @@ export default function SignInPage() {
                             key={index}
                             id={`otp-${index}`}
                             type="text"
-                            inputMode="numeric"
-                            pattern="[0-9]*"
                             maxLength={1}
                             value={digit}
                             onChange={(e) =>
