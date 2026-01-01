@@ -5,11 +5,8 @@ import {
   Clock,
   MessageSquare,
   Send,
-  ChevronDown,
-  ChevronUp,
   User,
-  MailIcon,
-  HelpCircle,
+  Phone,
   Sparkles,
   Baby,
   PawPrint,
@@ -18,7 +15,6 @@ import {
   XCircle,
 } from "lucide-react";
 
-import { faqItems } from "../../utils/data/contact.data";
 import { useCreateContactMutation } from "../../lib/api/contact.api";
 import {
   setLoading,
@@ -39,7 +35,6 @@ export const ContactForm = () => {
   const success = useSelector(selectContactSuccess);
   const error = useSelector(selectContactError);
 
-  const [activeFaq, setActiveFaq] = useState(null);
   const [showSuccess, setShowSuccess] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -48,10 +43,6 @@ export const ContactForm = () => {
     subject: "",
     message: "",
   });
-
-  const toggleFaq = (index) => {
-    setActiveFaq(activeFaq === index ? null : index);
-  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -200,7 +191,7 @@ export const ContactForm = () => {
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <MailIcon className="h-5 w-5 text-gray-400" />
+                  <Phone className="h-5 w-5 text-gray-400" />
                 </div>
                 <input
                   type="tel"
@@ -209,7 +200,7 @@ export const ContactForm = () => {
                   value={formData.phone_number}
                   onChange={handleInputChange}
                   className="block w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 bg-white/50"
-                  placeholder="(98x)-xxx-xxx-x"
+                  placeholder="98xxxxxxxx"
                   required
                   disabled={loading || isLoading}
                 />
@@ -257,32 +248,6 @@ export const ContactForm = () => {
             />
           </div>
 
-          {/* Family Considerations */}
-          <div className="mt-6 bg-linear-to-r from-indigo-50 to-rose-50 rounded-xl p-4">
-            <div className="flex items-center text-sm text-gray-700">
-              <Sparkles className="w-4 h-4 text-indigo-600 mr-2" />
-              <span className="font-medium">Family-Friendly Service:</span>
-            </div>
-            <div className="grid grid-cols-2 gap-2 mt-2 text-xs text-gray-600">
-              <div className="flex items-center">
-                <Baby className="w-3 h-3 mr-1 text-rose-500" />
-                Child-safe products
-              </div>
-              <div className="flex items-center">
-                <PawPrint className="w-3 h-3 mr-1 text-rose-500" />
-                Pet-friendly pros
-              </div>
-              <div className="flex items-center">
-                <Clock className="w-3 h-3 mr-1 text-rose-500" />
-                Flexible scheduling
-              </div>
-              <div className="flex items-center">
-                <Shield className="w-3 h-3 mr-1 text-rose-500" />
-                Background checked
-              </div>
-            </div>
-          </div>
-
           <div className="mt-6">
             <motion.button
               type="submit"
@@ -311,63 +276,6 @@ export const ContactForm = () => {
             </motion.button>
           </div>
         </form>
-      </motion.div>
-
-      {/* FAQ Section */}
-      <motion.div
-        className="mt-12 bg-white rounded-2xl shadow-lg p-8 border border-gray-100"
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-      >
-        <div className="flex items-center mb-6">
-          <div className="w-12 h-12 bg-linear-to-r from-indigo-600 to-rose-600 rounded-2xl flex items-center justify-center text-white mr-4">
-            <HelpCircle className="h-6 w-6" />
-          </div>
-          <div>
-            <h2 className="text-2xl font-bold text-gray-900">
-              Family Questions Answered
-            </h2>
-            <p className="text-gray-600">
-              Common questions from families like yours
-            </p>
-          </div>
-        </div>
-
-        <div className="space-y-4">
-          {faqItems.map((faq, index) => (
-            <motion.div
-              key={index}
-              className="bg-gray-50 rounded-xl p-4 hover:bg-gray-100 transition-colors"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: index * 0.1 }}
-            >
-              <button
-                onClick={() => toggleFaq(index)}
-                className="flex justify-between items-center w-full text-left font-semibold text-gray-900 hover:text-indigo-600"
-              >
-                <span className="text-lg">{faq.question}</span>
-                {activeFaq === index ? (
-                  <ChevronUp className="h-5 w-5 text-indigo-600" />
-                ) : (
-                  <ChevronDown className="h-5 w-5 text-gray-500" />
-                )}
-              </button>
-              {activeFaq === index && (
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: "auto" }}
-                  exit={{ opacity: 0, height: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="mt-3 text-gray-600 leading-relaxed border-t border-gray-200 pt-3"
-                >
-                  {faq.answer}
-                </motion.div>
-              )}
-            </motion.div>
-          ))}
-        </div>
       </motion.div>
     </div>
   );
