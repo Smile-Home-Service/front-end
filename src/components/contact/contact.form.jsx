@@ -269,7 +269,7 @@ export const ContactForm = () => {
                 </>
               ) : (
                 <>
-                  Send to Family Support Team
+                  Send to Smile Support Team
                   <Send className="ml-2 h-4 w-4" />
                 </>
               )}

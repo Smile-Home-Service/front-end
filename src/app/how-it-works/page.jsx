@@ -23,6 +23,8 @@ import {
   CheckCircle2,
 } from "lucide-react";
 
+import HeroBanner from "@/components/hero/HeroBanner";
+
 export default function HowItWorks() {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [activeStep, setActiveStep] = useState(1);
@@ -149,43 +151,14 @@ export default function HowItWorks() {
   ];
 
   return (
-    <div className="bg-gradient-to-br from-rose-50 via-white to-indigo-50">
+    <div className="bg-linear-to-br from-rose-50 via-white to-indigo-50">
       {/* Hero Section */}
-      <div className="bg-white/80 backdrop-blur-sm border-b border-rose-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="inline-flex items-center px-4 py-2 bg-rose-100 rounded-full text-rose-700 text-sm font-medium mb-6"
-            >
-              <Heart className="w-4 h-4 mr-2" />
-              Family-Friendly Services
-            </motion.div>
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className="text-4xl font-bold text-gray-900 sm:text-5xl lg:text-6xl"
-            >
-              How HomeService
-              <span className="block bg-gradient-to-r from-indigo-600 to-rose-600 bg-clip-text text-transparent">
-                Works for Families
-              </span>
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="mt-6 text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
-            >
-              Simple, stress-free home services designed around your family's
-              schedule. From quick fixes to much-needed pampering, we make it
-              easy.
-            </motion.p>
-          </div>
-        </div>
-      </div>
+      <HeroBanner
+        slogan="Family-Friendly Services"
+        title="How HomeService"
+        subtitle="Works for Families"
+        description="Simple, stress-free home services designed around your family's schedule. From quick fixes to much-needed pampering, we make it easy."
+      />
 
       {/* Steps Section */}
       <div className="max-w-7xl mx-auto py-20 px-4 sm:px-6 lg:px-8">
@@ -228,7 +201,7 @@ export default function HowItWorks() {
                     <div
                       className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-all ${
                         activeStep === step.id
-                          ? "bg-gradient-to-r from-indigo-600 to-rose-600 text-white shadow-lg"
+                          ? "bg-linear-to-r from-indigo-600 to-rose-600 text-white shadow-lg"
                           : "bg-indigo-100 text-indigo-600"
                       }`}
                     >
@@ -260,7 +233,7 @@ export default function HowItWorks() {
 
             {/* Family Benefits Sidebar */}
             <motion.div
-              className="mt-8 bg-gradient-to-br from-indigo-50 to-rose-50 rounded-2xl p-6 border border-indigo-100"
+              className="mt-8 bg-linear-to-br from-indigo-50 to-rose-50 rounded-2xl p-6 border border-indigo-100"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.6 }}
@@ -303,7 +276,7 @@ export default function HowItWorks() {
               <div className="flex flex-col lg:flex-row gap-8">
                 <div className="flex-1">
                   <div className="flex items-center mb-6">
-                    <div className="w-12 h-12 bg-gradient-to-r from-indigo-600 to-rose-600 rounded-2xl flex items-center justify-center text-white font-bold text-lg mr-4">
+                    <div className="w-12 h-12 bg-linear-to-r from-indigo-600 to-rose-600 rounded-2xl flex items-center justify-center text-white font-bold text-lg mr-4">
                       {activeStep}
                     </div>
                     <div>
@@ -330,7 +303,7 @@ export default function HowItWorks() {
                               onClick={() => setSelectedCategory(category.id)}
                               className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
                                 selectedCategory === category.id
-                                  ? "bg-gradient-to-r from-indigo-600 to-rose-600 text-white shadow-lg"
+                                  ? "bg-linear-to-r from-indigo-600 to-rose-600 text-white shadow-lg"
                                   : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                               }`}
                             >
@@ -353,7 +326,7 @@ export default function HowItWorks() {
                               <motion.div
                                 key={service.id}
                                 whileHover={{ scale: 1.02 }}
-                                className={`bg-gradient-to-r ${service.color} p-4 rounded-2xl text-white shadow-lg`}
+                                className={`bg-linear-to-r ${service.color} p-4 rounded-2xl text-white shadow-lg`}
                               >
                                 <div className="flex items-center justify-between">
                                   <div className="flex items-center">
@@ -385,7 +358,7 @@ export default function HowItWorks() {
 
                   {activeStep === 2 && (
                     <div className="space-y-6">
-                      <div className="bg-gradient-to-br from-indigo-50 to-rose-50 rounded-2xl p-6">
+                      <div className="bg-linear-to-br from-indigo-50 to-rose-50 rounded-2xl p-6">
                         <h4 className="font-semibold text-gray-900 mb-4 text-lg">
                           Choose What Works for Your Family
                         </h4>
@@ -432,7 +405,7 @@ export default function HowItWorks() {
                         <h4 className="font-semibold text-gray-900 mb-4 text-lg">
                           Your Family-Approved Professional
                         </h4>
-                        <div className="flex items-center space-x-4 p-4 bg-gradient-to-r from-indigo-50 to-rose-50 rounded-2xl">
+                        <div className="flex items-center space-x-4 p-4 bg-linear-to-r from-indigo-50 to-rose-50 rounded-2xl">
                           <img
                             src="https://images.unsplash.com/photo-1494790108755-2616b612b786?auto=format&fit=crop&w=100&q=80"
                             alt="Professional"
@@ -469,7 +442,7 @@ export default function HowItWorks() {
                             </div>
                           </div>
                         </div>
-                        <button className="mt-6 w-full bg-gradient-to-r from-indigo-600 to-rose-600 text-white py-4 rounded-2xl font-semibold hover:shadow-lg transition-all duration-300">
+                        <button className="mt-6 w-full bg-linear-to-r from-indigo-600 to-rose-600 text-white py-4 rounded-2xl font-semibold hover:shadow-lg transition-all duration-300">
                           Confirm Your Helper
                         </button>
                       </div>
@@ -478,7 +451,7 @@ export default function HowItWorks() {
 
                   {activeStep === 4 && (
                     <div className="space-y-6">
-                      <div className="bg-gradient-to-br from-indigo-50 to-rose-50 rounded-2xl p-6">
+                      <div className="bg-linear-to-br from-indigo-50 to-rose-50 rounded-2xl p-6">
                         <h4 className="font-semibold text-gray-900 mb-4 text-lg">
                           What Families Love
                         </h4>
@@ -578,7 +551,7 @@ export default function HowItWorks() {
       </div>
 
       {/* Family Benefits Section */}
-      <div className="bg-gradient-to-br from-indigo-50 to-rose-50 py-20">
+      <div className="bg-linear-to-br from-indigo-50 to-rose-50 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             className="text-center max-w-3xl mx-auto mb-16"
@@ -631,7 +604,7 @@ export default function HowItWorks() {
                 viewport={{ once: true }}
                 whileHover={{ y: -5 }}
               >
-                <div className="w-16 h-16 bg-gradient-to-r from-indigo-600 to-rose-600 rounded-2xl flex items-center justify-center mx-auto text-white">
+                <div className="w-16 h-16 bg-linear-to-r from-indigo-600 to-rose-600 rounded-2xl flex items-center justify-center mx-auto text-white">
                   {benefit.icon}
                 </div>
                 <h3 className="mt-6 text-xl font-semibold text-gray-900">

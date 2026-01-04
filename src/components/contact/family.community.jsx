@@ -39,12 +39,12 @@ export const FamilyCommunity = () => {
         })}
       </div>
 
-      <div className="bg-white/10 rounded-xl p-3 text-sm">
+      {/* <div className="bg-white/10 rounded-xl p-3 text-sm">
         <div className="flex items-center">
           <Home className="w-4 h-4 mr-2" />
-          <span>10,000+ families served this year</span>
+          <span>1000+ families served this year</span>
         </div>
-      </div>
+      </div> */}
     </motion.div>
   );
 };

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { usePathname, redirect } from "next/navigation";
+import { usePathname } from "next/navigation";
 import {
   HeartHandshake,
   User,
@@ -88,17 +88,15 @@ export default function Navbar() {
             {/* Logo */}
             <a href="/" className="flex items-center">
               <div className="relative">
-                <div className="bg-gradient-to-r from-indigo-600 to-rose-600 p-2 rounded-2xl">
+                <div className="bg-linear-to-r from-indigo-600 to-rose-600 p-2 rounded-2xl">
                   <HeartHandshake className="h-7 w-7 text-white" />
                 </div>
               </div>
               <div className="ml-3 flex flex-col">
-                <span className="text-xl font-bold bg-gradient-to-r from-indigo-600 to-rose-600 bg-clip-text text-transparent">
+                <span className="text-xl font-bold bg-linear-to-r from-indigo-600 to-rose-600 bg-clip-text text-transparent">
                   Smile
                 </span>
-                <span className="text-xs text-gray-500 -mt-1">
-                  Home Service
-                </span>
+                <span className="text-xs text-gray-500 -mt-1">Home Nepal</span>
               </div>
             </a>
 
@@ -119,7 +117,7 @@ export default function Navbar() {
                     <span className="mr-2 opacity-70">{link.icon}</span>
                     {link.name}
                     {isActive && (
-                      <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-indigo-600 to-rose-600 rounded-full" />
+                      <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-linear-to-r from-indigo-600 to-rose-600 rounded-full" />
                     )}
                   </a>
                 );
@@ -131,7 +129,7 @@ export default function Navbar() {
               {isAuthenticated ? (
                 <a
                   href="/profile"
-                  className="flex items-center px-6 py-2 rounded-2xl text-sm font-semibold text-white bg-gradient-to-r from-indigo-600 to-rose-600 hover:from-indigo-700 hover:to-rose-700 shadow-lg hover:shadow-xl transition-all"
+                  className="flex items-center px-6 py-2 rounded-2xl text-sm font-semibold text-white bg-linear-to-r from-indigo-600 to-rose-600 hover:from-indigo-700 hover:to-rose-700 shadow-lg hover:shadow-xl transition-all"
                 >
                   <User className="w-4 h-4 mr-2" />
                   Profile
@@ -145,7 +143,7 @@ export default function Navbar() {
                     <User className="w-4 h-4 mr-2" />
                     Sign In
                   </button>
-                  <button className="flex items-center px-6 py-2 rounded-2xl text-sm font-semibold text-white bg-gradient-to-r from-indigo-600 to-rose-600 hover:from-indigo-700 hover:to-rose-700 shadow-lg hover:shadow-xl transition-all hover:cursor-pointer">
+                  <button className="flex items-center px-6 py-2 rounded-2xl text-sm font-semibold text-white bg-linear-to-r from-indigo-600 to-rose-600 hover:from-indigo-700 hover:to-rose-700 shadow-lg hover:shadow-xl transition-all hover:cursor-pointer">
                     <LogIn className="w-4 h-4 mr-2" />
                     Become a Member
                   </button>
@@ -186,11 +184,11 @@ export default function Navbar() {
                 className="flex items-center"
                 onClick={() => setIsMenuOpen(false)}
               >
-                <div className="bg-gradient-to-r from-indigo-600 to-rose-600 p-2 rounded-2xl">
+                <div className="bg-linear-to-r from-indigo-600 to-rose-600 p-2 rounded-2xl">
                   <HeartHandshake className="h-6 w-6 text-white" />
                 </div>
                 <div className="ml-3">
-                  <span className="text-lg font-bold bg-gradient-to-r from-indigo-600 to-rose-600 bg-clip-text text-transparent">
+                  <span className="text-lg font-bold bg-linear-to-r from-indigo-600 to-rose-600 bg-clip-text text-transparent">
                     HomeServe
                   </span>
                   <span className="block text-xs text-gray-500">
@@ -211,7 +209,7 @@ export default function Navbar() {
                       href={link.href}
                       className={`flex items-center w-full px-4 py-4 rounded-2xl text-base font-medium transition-colors ${
                         isActive
-                          ? "bg-gradient-to-r from-indigo-50 to-rose-50 text-indigo-700 border border-indigo-100"
+                          ? "bg-linear-to-r from-indigo-50 to-rose-50 text-indigo-700 border border-indigo-100"
                           : "text-gray-700 hover:bg-gray-50/80 hover:text-indigo-600"
                       }`}
                       onClick={() => setIsMenuOpen(false)}
@@ -256,7 +254,7 @@ export default function Navbar() {
                       Sign In
                     </button>
                     <button
-                      className="flex items-center justify-center w-full px-4 py-4 rounded-2xl text-base font-semibold text-white bg-gradient-to-r from-indigo-600 to-rose-600 hover:from-indigo-700 hover:to-rose-700 shadow-lg transition-all"
+                      className="flex items-center justify-center w-full px-4 py-4 rounded-2xl text-base font-semibold text-white bg-linear-to-r from-indigo-600 to-rose-600 hover:from-indigo-700 hover:to-rose-700 shadow-lg transition-all"
                       onClick={() => setIsMenuOpen(false)}
                     >
                       <LogIn className="w-5 h-5 mr-2" />
@@ -267,7 +265,7 @@ export default function Navbar() {
               </div>
 
               {/* Contact Info */}
-              <div className="mt-8 p-4 bg-gradient-to-r from-indigo-50 to-rose-50 rounded-2xl border border-indigo-100/50">
+              <div className="mt-8 p-4 bg-linear-to-r from-indigo-50 to-rose-50 rounded-2xl border border-indigo-100/50">
                 <p className="text-sm text-gray-600 mb-2">
                   Need immediate help?
                 </p>

@@ -13,19 +13,21 @@ export const FamilySupportHour = () => {
         <div className="w-10 h-10 bg-linear-to-r from-indigo-600 to-rose-600 rounded-xl flex items-center justify-center text-white mr-3">
           <Clock className="h-5 w-5" />
         </div>
-        <h2 className="text-xl font-bold text-gray-900">
-          Family Support Hours
-        </h2>
+        <h2 className="text-xl font-bold text-gray-900">Smile Support Hours</h2>
       </div>
 
       <div className="space-y-4">
         <div className="flex justify-between items-center p-3 bg-indigo-50 rounded-lg">
           <span className="text-gray-700 font-medium">Weekdays</span>
-          <span className="font-semibold text-indigo-700">7am - 9pm</span>
+          <span className="font-semibold text-indigo-700">
+            09:00 A.M - 08:00 P.M
+          </span>
         </div>
         <div className="flex justify-between items-center p-3 bg-rose-50 rounded-lg">
           <span className="text-gray-700 font-medium">Weekends</span>
-          <span className="font-semibold text-rose-700">8am - 8pm</span>
+          <span className="font-semibold text-rose-700">
+            10:00 A.M - 02:00 P.M
+          </span>
         </div>
         <div className="flex justify-between items-center p-3 bg-emerald-50 rounded-lg">
           <span className="text-gray-700 font-medium">Emergency</span>

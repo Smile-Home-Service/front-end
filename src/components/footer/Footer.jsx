@@ -16,6 +16,7 @@ import {
   Send,
   Heart,
 } from "lucide-react";
+import Newsletter from "../newsletter/Newsletter";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -145,35 +146,7 @@ export default function Footer() {
           {/* Newsletter & Social */}
           <div className="space-y-8">
             {/* Newsletter */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-            >
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                Join Our Family Newsletter
-              </h3>
-              <p className="text-gray-600 mb-6">
-                Get home care tips, special offers, and family-friendly service
-                updates delivered to your inbox.
-              </p>
-              <form className="flex flex-col sm:flex-row gap-3">
-                <input
-                  type="email"
-                  placeholder="your.family@email.com"
-                  className="flex-1 px-4 py-3 border border-gray-300 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 bg-white/50 backdrop-blur-sm"
-                />
-                <motion.button
-                  type="submit"
-                  className="flex items-center justify-center px-6 py-3 bg-gradient-to-r from-indigo-600 to-rose-600 text-white rounded-2xl text-sm font-semibold hover:from-indigo-700 hover:to-rose-700 transition-all shadow-lg hover:shadow-xl"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Send className="w-4 h-4 mr-2" />
-                  Subscribe
-                </motion.button>
-              </form>
-            </motion.div>
+            <Newsletter />
 
             {/* Social Links */}
             <motion.div
@@ -195,11 +168,6 @@ export default function Footer() {
                   {
                     icon: <Instagram className="w-5 h-5" />,
                     name: "Instagram",
-                    href: "#",
-                  },
-                  {
-                    icon: <Twitter className="w-5 h-5" />,
-                    name: "Twitter",
                     href: "#",
                   },
                   {
@@ -228,7 +196,7 @@ export default function Footer() {
 
             {/* App Download CTA */}
             <motion.div
-              className="bg-gradient-to-r from-indigo-600 to-rose-600 rounded-2xl p-6 text-white"
+              className="bg-linear-to-r from-indigo-600 to-rose-600 rounded-2xl p-6 text-white"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}

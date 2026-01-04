@@ -10,12 +10,14 @@ import { baseApi } from "../api/base.api";
 import userReducer from "./slices/user.slice";
 import contactReducer from "./slices/contact.slice";
 import faqReducer from "./slices/faq.slice";
+import appSettingsReducer from "./slices/appSettings.slice";
+import testimonialReducer from "./slices/testimonial.slice";
 
 // Persist config
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["user"], // Only persist user slice
+  whitelist: ["user", "appSettings"], // Only persist user and appSettings slices
   blacklist: [baseApi.reducerPath], // Don't persist API cache
 };
 
@@ -25,6 +27,8 @@ const rootReducer = combineReducers({
   user: userReducer,
   contact: contactReducer,
   faq: faqReducer,
+  appSettings: appSettingsReducer,
+  testimonials: testimonialReducer,
 });
 
 // Create persisted reducer

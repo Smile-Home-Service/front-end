@@ -9,7 +9,7 @@ export const ContactMethod = () => {
       {contactMethods.map((method, index) => (
         <motion.div
           key={index}
-          className="bg-white rounded-2xl shadow-lg p-6 text-center border border-gray-100 hover:shadow-xl transition-all"
+          className="bg-white rounded-2xl shadow-lg p-6 text-center border border-gray-100 hover:shadow-xl transition-all flex flex-col h-full"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -17,25 +17,27 @@ export const ContactMethod = () => {
         >
           <div className="flex justify-center">
             <div
-              className={`bg-linear-to-r ${method.color} rounded-2xl p-3 text-white shadow-lg`}
+              className={`bg-linear-to-r ${method.color} rounded-2xl p-3 text-white shadow-lg flex-shrink-0`}
             >
               {method.icon}
             </div>
           </div>
-          <h3 className="mt-4 text-lg font-semibold text-gray-900">
+          <h3 className="mt-4 text-lg font-semibold text-gray-900 line-clamp-2">
             {method.title}
           </h3>
-          <p className="mt-2 text-gray-900 font-medium text-lg">
+          <p className="mt-2 text-gray-900 font-medium text-base wrap-break line-clamp-3">
             {method.details}
           </p>
-          <p className="mt-1 text-sm text-gray-500">{method.description}</p>
+          <p className="mt-2 text-sm text-gray-500 grow">
+            {method.description}
+          </p>
           {method.emergency && (
-            <div className="mt-2 inline-flex items-center px-2 py-1 bg-rose-100 text-rose-700 rounded-full text-xs font-medium">
+            <div className="mt-3 inline-flex items-center justify-center px-2 py-1 bg-rose-100 text-rose-700 rounded-full text-xs font-medium">
               <Clock className="w-3 h-3 mr-1" />
               24/7 Emergency
             </div>
           )}
-          <button className="mt-4 text-indigo-600 hover:text-indigo-700 text-sm font-semibold">
+          <button className="mt-auto pt-4 text-indigo-600 hover:text-indigo-700 text-sm font-semibold">
             {method.action} →
           </button>
         </motion.div>
