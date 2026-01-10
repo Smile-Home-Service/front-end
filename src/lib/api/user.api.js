@@ -36,9 +36,24 @@ export const userApi = baseApi.injectEndpoints({
     }),
     logout: builder.mutation({
       query: () => ({
-        url: "/users/logout",
+        url: "/auth/logout",
         method: "POST",
       }),
+    }),
+    getUserProfile: builder.query({
+      query: (id) => `/users/profile`,
+      providesTags: (result, error, id) => [{ type: "User", id }],
+    }),
+    updateProfile: builder.mutation({
+      query: ({ id, ...body }) => ({
+        url: `/users/${id}/update`,
+        method: "PUT",
+        body,
+      }),
+      invalidatesTags: (result, error, { id }) => [
+        { type: "User", id },
+        "Users",
+      ],
     }),
   }),
 });
@@ -49,4 +64,7 @@ export const {
   useSendOtpMutation,
   useVerifyOtpMutation,
   useLogoutMutation,
+  useGetUserProfileQuery,
+  useLazyGetUserProfileQuery,
+  useUpdateProfileMutation,
 } = userApi;

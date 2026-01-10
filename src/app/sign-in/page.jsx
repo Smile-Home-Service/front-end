@@ -12,7 +12,11 @@ import {
 } from "lucide-react";
 
 import { SignInBenefits } from "./components/signin.benefits";
-import { useSendOtpMutation, useVerifyOtpMutation } from "@/lib/api/user.api";
+import {
+  useSendOtpMutation,
+  useVerifyOtpMutation,
+  useLazyGetUserProfileQuery,
+} from "@/lib/api/user.api";
 import { useDispatch } from "react-redux";
 import { setUser } from "@/lib/store/slices/user.slice";
 
@@ -27,8 +31,10 @@ export default function SignInPage() {
 
   const [sendOtp, { isLoading: isSendingOtp }] = useSendOtpMutation();
   const [verifyOtp, { isLoading: isVerifyingOtp }] = useVerifyOtpMutation();
+  const [getUserProfile, { isLoading: isFetchingProfile }] =
+    useLazyGetUserProfileQuery();
 
-  const isLoading = isSendingOtp || isVerifyingOtp;
+  const isLoading = isSendingOtp || isVerifyingOtp || isFetchingProfile;
 
   // Countdown timer for OTP resend
   useEffect(() => {
@@ -69,17 +75,42 @@ export default function SignInPage() {
         otp: otpValue,
       }).unwrap();
 
+      let userData = response.user;
+
       // Assuming response contains user data and accessToken
       if (response.user) {
+        // First set the token and basic user info so subsequent requests are authenticated
         dispatch(
           setUser({
             user: response.user,
             token: response.accessToken,
           })
         );
+
+        try {
+          // Fetch full profile data using the user ID
+          const profileData = await getUserProfile(response.user.id).unwrap();
+          userData = profileData.user;
+
+          // Update the user state with complete profile data
+          dispatch(
+            setUser({
+              user: userData,
+              token: response.accessToken,
+            })
+          );
+        } catch (profileError) {
+          console.error("Failed to fetch full user profile:", profileError);
+          // We already have basic user info from login, so we can still proceed
+        }
       }
 
-      router.push("/profile");
+      // Check if user is verified to determine redirect
+      if (userData?.isVerified) {
+        router.push("/profile");
+      } else {
+        router.push("/complete-profile");
+      }
     } catch (error) {
       console.error("Failed to verify OTP:", error);
       alert(

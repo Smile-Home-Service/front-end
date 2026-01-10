@@ -33,6 +33,8 @@ export default function ProfilePage() {
   const isAuthenticated = useSelector(selectIsAuthenticated);
   const [logoutApi] = useLogoutMutation();
 
+  console.log(currentUser);
+
   useEffect(() => {
     if (!isAuthenticated) {
       router.push("/sign-in");
@@ -41,13 +43,18 @@ export default function ProfilePage() {
 
   if (!isAuthenticated || !currentUser) return null;
 
+  const profile = currentUser.profile || {};
   const user = {
-    name: "User", // Default if not in currentUser
-    email: "Not provided",
-    phone: currentUser.phoneNumber || "Not provided",
-    address: "Not provided",
+    name: profile.first_name
+      ? `${profile.first_name} ${profile.last_name || ""}`.trim()
+      : "User",
+    email: profile.email || "Not provided",
+    phone: currentUser.phone_number || "Not provided",
+    address: profile.address || "Not provided",
     joinDate: "Member since 2024",
-    avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=${currentUser.phoneNumber}`,
+    avatar:
+      profile.profile_picture ||
+      `https://api.dicebear.com/7.x/avataaars/svg?seed=${currentUser.phone_number}`,
     ...currentUser,
   };
 
