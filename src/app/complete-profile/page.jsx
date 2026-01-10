@@ -18,7 +18,7 @@ import {
   setUser,
 } from "@/lib/store/slices/user.slice";
 import {
-  useUpdateProfileMutation,
+  useCompleteProfileMutation,
   useLazyGetUserProfileQuery,
 } from "@/lib/api/user.api";
 
@@ -28,7 +28,8 @@ export default function CompleteProfilePage() {
   const currentUser = useSelector(selectCurrentUser);
   const isAuthenticated = useSelector(selectIsAuthenticated);
   const token = useSelector((state) => state.user.token);
-  const [updateProfile, { isLoading: isUpdating }] = useUpdateProfileMutation();
+  const [updateProfile, { isLoading: isUpdating }] =
+    useCompleteProfileMutation();
   const [getUserProfile] = useLazyGetUserProfileQuery();
 
   const [formData, setFormData] = useState({
@@ -49,15 +50,10 @@ export default function CompleteProfilePage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await updateProfile({
-        id: currentUser.id,
-        ...formData,
-      }).unwrap();
+      await updateProfile(formData).unwrap();
 
       // Refetch profile to get updated state including isVerified
-      const updatedProfileResponse = await getUserProfile(
-        currentUser.id
-      ).unwrap();
+      const updatedProfileResponse = await getUserProfile().unwrap();
 
       dispatch(
         setUser({
